@@ -1,0 +1,13 @@
+\begin{thebibliography}{1}
+
+\bibitem{NGdescent}
+Shun-ichi Amari.
+\newblock Natural gradient works efficiently in learning.
+\newblock {\em Neural Computation}, 10(2):251--276, 1998.
+
+\bibitem{Karpathy2022}
+Andrej Karpathy.
+\newblock \text{NanoGPT}.
+\newblock \url{https://github.com/karpathy/nanoGPT}, 2022.
+
+\end{thebibliography}
