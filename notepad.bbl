@@ -5,9 +5,21 @@ Shun-ichi Amari.
 \newblock Natural gradient works efficiently in learning.
 \newblock {\em Neural Computation}, 10(2):251--276, 1998.
 
+\bibitem{bernstein2025deriving}
+Jeremy Bernstein.
+\newblock Deriving muon, 2025.
+
 \bibitem{Karpathy2022}
 Andrej Karpathy.
 \newblock \text{NanoGPT}.
 \newblock \url{https://github.com/karpathy/nanoGPT}, 2022.
+
+\bibitem{moonshot}
+Jingyuan Liu, Jianlin Su, Xingcheng Yao, Zhejun Jiang, Guokun Lai, Yulun Du,
+  Yidao Qin, Weixin Xu, Enzhe Lu, Junjie Yan, Yanru Chen, Huabin Zheng, Yibo
+  Liu, Shaowei Liu, Bohong Yin, Weiran He, Han Zhu, Yuzhi Wang, Jianzhou Wang,
+  Mengnan Dong, Zheng Zhang, Yongsheng Kang, Hao Zhang, Xinran Xu, Yutao Zhang,
+  Yuxin Wu, Xinyu Zhou, and Zhilin Yang.
+\newblock Muon is scalable for llm training, 2025.
 
 \end{thebibliography}

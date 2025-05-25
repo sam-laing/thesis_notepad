@@ -19,12 +19,13 @@
 \usepackage{graphicx}
 \usepackage{listings}
 \usepackage{xcolor}
-\graphicspath{ {~/Maths/3rd_sem1/} }
+\graphicspath{ {/home/slaing/ML/thesis/thesis_notepad/images/} }
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{corollary}[theorem]{Corollary}
 
+\usepackage{comment}
 \usepackage{hyperref}
 \hypersetup{
 colorlinks=true,
@@ -49,6 +50,7 @@ colorlinks=true,
 \renewcommand{\P}{\mathfrak{P}}
 \newcommand{\PP}{\mathbb{P}}
 \newcommand{\E}{\mathbb{E}}
+\newcommand{\todo}[1]{{\color{red}\bf{TODO: #1}}}
 
 
 \newenvironment{proof}[1][Proof]{\begin{trivlist}
@@ -83,6 +85,7 @@ colorlinks=true,
 \title{Thesis Notepad of Ideas and Progress etc}
 \maketitle
 \tableofcontents
+\begin{comment}
 \chapter{Math formulation of ideas}
 \section{Adam Ideas}
 The Adam algorithm is applied in the following way. \\
@@ -114,32 +117,6 @@ Solving would give:
 \]
 Ok definitely stupid: can't know lr ahead of time. 
 Will just implement directly in torch.
-\subsection*{Coupling of momentum and RMS}
-The momentum and RMS boil down to keeping track of a moving average ($\text{EMT}_{\beta}$) parametrized by $\beta\in \R_{\ge 0}$. 
-\\
-While regular adam is given by:
-\[
-w^{t+1} = w^{t} - \eta \frac{\text{EMA}_{\beta_1}(g_t)}{\sqrt{\text{EMA}_{\beta_2}(g_t ^2) } + \varepsilon  }
-\] 
-one could also consider the double nesting formula
-\[
-w^{t+1} = w^{t} - \eta \text{EMA}_{\beta_1} \left( \frac{g_t}{\sqrt{EMA_{\beta_2}(g_t^2)} + \varepsilon  } \right) 
-\] 
-
-or in two steps 
-\begin{align*}
-	v^{t} &= \text{bias correct}(\beta_2v^{t-1} + (1-\beta_2)g^{t}\odot g^{t})\\
-	K^{t} &= \text{bias correct}(\beta_1K^{t-1} + (1-\beta_1) \frac{g_{t}}{\sqrt{v^{t}} + \varepsilon  })
-\end{align*}
-When doing this, the bias correction term becomes less clear cut. Of course the second moment estimate $v^{t}$ is the same ($1-\beta_1^{t} $ if you believe $E[g_t]$ is similar on initialization) . But after the nested average we have a sum of the form 
-
-\[
-	K^{t} = (1-\beta_1)\sum_{j=0}^{t-1} {\beta_1^{t-i-1} \frac{g_j}{\sqrt{v_j} + \varepsilon }}
-\]
-
-Can we make the same kind of assumption for initial values of $t$? Namely that $E[\frac{g_j}{\sqrt{v_j} + \varepsilon }]$ is "close enough" for all small $j$ so that we can reduce the ugly expression above to a geometric sum. If so, great the term is the same. If not, any other clever tricks? 
-
-
 \section*{to also consider}
 \begin{itemize}
 \item The Frederic Kunstner paper discusses Zipf's law and looking at loss of less common tokens. Shows adam learns the less frequent tokens better than SGD even with no batches
@@ -301,6 +278,8 @@ The formula for $\varepsilon (t)$ is of the form $\varepsilon (t) = A e^{k(t-wT)
  \[
 	 A = \frac{\varepsilon _{\text{max}} - \varepsilon _0}{e^{kt(E-w)} - 1}\quad , \quad B = \varepsilon _0  - A
 \] 
+
+\end{comment}
 \subsection*{A closed form for weight decay updates}
 Just something i was playing with: a derivation for a closed form expression for  $\theta^{k+1}$ in terms of the initialised weights $\theta_0$ and the step updates $(s_{j})_{j \in 0: k} $
 \\\\
@@ -367,7 +346,10 @@ The authors also phrase the problem in the form of a constrained optimization pr
 
 TO BE COMPLETED
 
-\chapter{Some Kind of Plan/Structure}
+
+\begin{comment}
+
+\chapcommente Kind of Plan/Structure}
 Generally looking at adamw and related adaptive optimizers and investigating several of the factors which make it a supreme optimizer
 
 \begin{itemize}
@@ -425,6 +407,8 @@ however the wd update insists
 
 %%%%% Start of Structure properly 
 
+\end{comment}
+
 \chapter{A Brief History of Optimization}
 
 
@@ -435,7 +419,55 @@ however the wd update insists
 \chapter{Understanding Adam}
 We discuss some of the underlying theory, review some important literature and run some experiments with the aim of understanding the dynamics of AdamW and the role which each hyperparameter plays in Adam's efficacy.\\
 Experiments 
+\section{Why is AdamW the Top Dog?}
+Despite extensive research into optimizers for deep learning in the past decade, AdamW remains the default choice for the vast majority of both industry and academic applications. \\
+While several 
 
+\section{Some Experiments/Ablations}
+Need a lot of sensitivity curves for models in vision and language setting.
+\begin{itemize}
+\item Nested moving average vs regular Adam: are they the same? Interesting since the choice of whichway to take the EMA is sort of arbitrary 
+\item Adam2SGD: Could look at SGD2Adam since the paper from Teodora showed some advantage in doing so
+\item Epsilon scheduling experiments: could be very related to the sgd thing... Can also be bespoke to parameter (seems like a universal epsilon for all parameters could be foolish. 
+\item Beta scheduling too with experiments about the angle between the two 
+\item The BACKPack package experiment with class variances individual. Relationship to signSGD stuff from Hennig paper.
+\end{itemize}
+\section{Why is the same $\varepsilon $ Used Everywhere?}
+While regular adam is given by:
+\[
+	w^{t+1} = w^{t} - \eta \frac{\text{EMA}_{\beta_1}(g_t)}{\sqrt{\text{EMA}_{\beta_2}(g_t ^2) } \color{red}{+ \varepsilon  }}
+\] 
+with $\varepsilon = 1e-8$ as the default choice. 
+
+It has been observed in a number of papers (epsilon stuff), that language model pretraining can be improved by altering the epsilon hyperparameter. Indeed increasing $\varepsilon $ to $1e-6$ can decrease final validation perplexity but at the cost of decreased training stability. Conversely, decreasing  $\varepsilon $ can improve stability without noticable decrease in performance. \\
+In every one of these experiments, the $\varepsilon $ value is chosen to apply globally, however the 
+We consider the distribution of 
+\section{Nesting the Moving averages}
+\subsection*{Coupling of momentum and RMS}
+The momentum and RMS boil down to keeping track of a moving average ($\text{EMT}_{\beta}$) parametrized by $\beta\in \R_{\ge 0}$. 
+\\
+While regular adam is given by:
+\[
+w^{t+1} = w^{t} - \eta \frac{\text{EMA}_{\beta_1}(g_t)}{\sqrt{\text{EMA}_{\beta_2}(g_t ^2) } + \varepsilon  }
+\] 
+one could also consider the double nesting formula
+\[
+w^{t+1} = w^{t} - \eta \text{EMA}_{\beta_1} \left( \frac{g_t}{\sqrt{EMA_{\beta_2}(g_t^2)} + \varepsilon  } \right) 
+\] 
+Or expressed in two steps:
+\begin{align*}
+	v^{t} &= \beta_2v^{t-1} + (1-\beta_2)g^{t}\odot g^{t}\\
+	K^{t} &= \beta_1K^{t-1} + (1-\beta_1) \frac{g_{t}}{\sqrt{v^{t}} + \varepsilon  }
+\end{align*}
+Of course, the 
+
+When doing this, the bias correction term becomes less clear cut. Of course the second moment estimate $v^{t}$ is the same ($1-\beta_1^{t} $ if you believe $E[g_t]$ is similar on initialization) . But after the nested average we have a sum of the form 
+
+\[
+	K^{t} = (1-\beta_1)\sum_{j=0}^{t-1} {\beta_1^{t-i-1} \frac{g_j}{\sqrt{v_j} + \varepsilon }}
+\]
+
+Can we make the same kind of assumption for initial values of $t$? Namely that $E[\frac{g_j}{\sqrt{v_j} + \varepsilon }]$ is "close enough" for all small $j$ so that we can reduce the ugly expression above to a geometric sum. If so, great the term is the same. If not, any other clever tricks? 
 
 
 \chapter{Bias Correction is Bogus}
@@ -468,8 +500,9 @@ This assumption that $\E[g_t] \approx \E[g_i]$ for $i<t$ is patently false. We a
 In any case, the influence of bias correction to the current EMA statistics is not appreciable after a sufficient number of steps are taken. Or so this may seem:
 
 \subsection*{Bias Correction isn't the End of the Story}
-When initially implementing the bias correction-free version of AdamW, we assumed that initialising the moments $m_t, v_t$ with the gradients  $g_0, g_0^2$ respectively would be an effective way to remove any bias - thus eliminating the need for bias correction. However, we discovered that this is not quite as simple as initially expected. While initialising the moments as zero certainly induces a bias, it is not the same bias that is corrected by bias correction. 
+When initially implementing the bias correction-free version of AdamW, we assumed that initialising the moments $m_t, v_t$ with the gradients  $g_0, g_0^2$ respectively would be an effective way to remove any bias - thus eliminating the need for bias correction. However, we discovered that this is not quite as simple as initially expected. While initialising the moments as zero certainly induces a bias, it is not the same bias that is corrected by bias correction. \\
 \\
+We write down, in very explicit terms, the update step for the first and then all subsequent steps) in for each of the four possibilities (zero init, bias correction) $\in $ (True, False)
 Consider the following closed form expression for the exponential moving averages:
 \begin{align*}
 m_t = \beta_1^{t}m_0 + (1-\beta_1)\sum_{j=1}^{t} {\beta_1^{t-j}g_j}
@@ -498,7 +531,7 @@ Then bias correction is either applied or not. Therefore we have:
 \hat{m}_1 = \begin{cases}
 	g_1, &\text{if ZI and BC}\\
 	(1-\beta_1)g_1, &\text{if ZI and no BC}\\
-	\cfrac{1}{1-\beta_1}g_1, &\text{if no ZI and BC}\\
+	\cfrac{1}{1-\beta_1}\ g_1, &\text{if no ZI and BC}\\
 	g_1, &\text{if no ZI and no BC}
 \end{cases}
 \] 
@@ -507,28 +540,70 @@ By the very same logic, we have
 \hat{v}_1 = \begin{cases}
 	g_1^2, \quad &\text{if ZI and BC}\\
 	(1-\beta_2)g_1^2, &\text{if ZI and no BC}\\
-	\frac{1}{1-\beta_2}g_1^2, &\text{if no ZI and BC}\\
+	\cfrac{1}{1-\beta_2} \ g_1^2, &\text{if no ZI and BC}\\
 	g_1^2, &\text{if no ZI and no BC}
 \end{cases}
 \]
-Thus the first optimizer step is given by:
+Thus the first optimizer step is given by (denote the unit vector in the direction of $g_1$ by $\hat{g_1}$ and these expressions are vectorized over all $g_1^{(i)}$ ):
 \[
 \implies \text{first step} = s_1 = \frac{\hat{m}_1}{\sqrt{\hat{v_1}} } = \begin{cases}
-	\cfrac{g_1}{\sqrt{g_1^2}  \ \color{red}{+ \varepsilon } } = \cfrac{g_1}{g_1  \ \color{red}{+ \varepsilon } } = \cfrac{1}{1 + \varepsilon / g_1},, &\text{if ZI and BC}\\
-	\cfrac{(1-\beta_1)g_1}{\sqrt{1-\beta_2} g_1 \color{red}{+\varepsilon} } &\text{if ZI and no BC }\\ 
-	\frac{}{}\\
-	\cfrac{g_1}{\sqrt{g_1^2}  \ \color{red}{+ \varepsilon } } = , &\text{if no ZI and no BC}\\
-
+	\cfrac{g_1}{\sqrt{g_1^2}  \ \color{red}{+ \varepsilon } } = \cfrac{g_1}{|g_1|  \ \color{red}{+ \varepsilon } } = \cfrac{1}{1 \color{red}{+ \varepsilon / |g_1|}}\text{sign}(g_1), &\text{if ZI and BC}\\
+	\cfrac{(1-\beta_1)g_1}{\sqrt{1-\beta_2}\ |g_1| \color{red}{+\varepsilon} } = \cfrac{1-\beta_1}{\sqrt{1-\beta_2} } \ \cfrac{1}{1 \color{red}{+ \frac{\varepsilon }{|g_1|\sqrt{1-\beta_2} }}}\text{sign}(g_1) &\text{if ZI and no BC }\\ 
+	\\
+	\cfrac{\frac{1}{1-\beta_1}g_1}{\frac{1}{\sqrt{1-\beta_2}} |g_1| \color{red}{+\varepsilon }} =\cfrac{\sqrt{1-\beta_2}}{1-\beta_1} \cfrac{1}{1 \color{red}{+ \frac{\varepsilon \sqrt{1-\beta_2} }{|g_1|}}} \ \text{sign}(g_1), &\text{if no ZI and BC}\\
+	\cfrac{1}{1 \color{red}{+ \varepsilon / |g_1|}} \ \text{sign}(g_1), &\text{if no ZI and no BC}\\
 \end{cases}
 \]
-For the ZI and BC (and no ZI and no BC) it seems like basically a random first step.
-Next we have 
+The direction of the Adam update is then the same for all cases but the magnitude varies substantially.
+So the magnitude of the first gradient (which is basically random in some capacity since the weights are randomly computed and there is just one noisy batch of gradient data to go by) basically determines the direction of the first step. \\
+What matter is the order of magnitude of $|g_1|$ relative to 
+For the case no ZI and BC, basically the factor $\frac{\sqrt{1-\beta_2} }{1-\beta_2}$ is making the gradient substantially larger (depends somewhat on values of $\beta_1, \beta_2$). \\
+\\
+From the general formula:
+\begin{align*}
+m_t = \beta_1^{t}m_0 + (1-\beta_1)\sum_{j=1}^{t} {\beta_1^{t-j}g_j} \quad \text{and } \hat{m}_t = \frac{1}{1-\beta_1^{t}}m_t \text{ if BC else } m_t
+\end{align*}
+and $(1 - \beta_1^{t}) = (1-\beta_1)\sum_{j=1}^{t-1} {\beta^{j}}$ \\
+\\
+we consider the four cases with ZI and BC (let $B := \sum_{j=1}^{t-1} {\beta_1^{j}}$:
 \[
-m_2 = \beta_1m_1+ (1-\beta_1)g_2 = \begin{cases}
-	\beta_1(1-\beta_1) g_1 + (1-\beta_1) g_2, \quad &\text{if ZI}\\
-	\beta_1g_1 + (1-\beta_1)g_2 & \text{if no ZI}
+	\hat{m_t} = \begin{cases}
+		\frac{1}{B}\sum_{j=1}^{t} {\beta_1^{t-j}g_j} \quad &\text{if ZI and BC}\\
+		\\
+	       (1-\beta_1)\sum_{j=1}^{t} {\beta_1^{t-j}g_j}  &\text{if ZI and no BC}\\
+	       \\
+             \frac{\beta_1^{t}}{(1-\beta_1)B}g_1 +  \frac{1}{B}\sum_{j=1}^{t} {\beta_1^{t-j}g_j}  						     &\text{if no ZI and BC}\\
+	     \\
+	\beta_1^{t}g_1 + (1-\beta_1)\sum_{j=1}^{t} {\beta_1^{t-j}g_j}   						     & \text{if no ZI and no BC}
+
 \end{cases}
 \] 
+why not just divide by $1-\beta_2$? rather than $1-\beta_2^{t}$? makes no difference up to scaling
+
+
+
+\section{Is Bias Correction just Hidden Learning rate scheduling?}
+In our experiments comparing adam with and without bias correction, we found that certain choices of the pair $\beta_1, \beta_2$ caused a much greater discrepency in performance particularly when no learning rate schedule is used. \\
+\\
+Consider the following factorization (we will ignore the $\varepsilon $ in the denominator for simplicity):
+\begin{align*}
+	\frac{\hat{m}_t}{\hat{v}_t} = \cfrac{\frac{1}{1-\beta_1^{t}} m_t}{\sqrt{ \frac{1}{1-\beta_2^{t}}v_t}} = \cfrac{\sqrt{1-\beta_2^{t}} }{1-\beta_1^{t}} \ \cfrac{m_t}{\sqrt{v_t} }
+\end{align*}
+The behaviour of this factor $\rho(t;\beta_1,\beta_2) := \frac{\sqrt{1-\beta_2^{t}} }{1-\beta_1^{t}}$ depends greatly on the choice of $\beta_1, \beta_2\in [0, 1)$ \\
+Consider the following plot: \\
+\includegraphics{bias_correction_factor1.pdf}
+\\
+For the pair $(\beta_1, \beta_2) = (0.9, 0.999)$, the factor resembles a very steady warmup whereas for the pair $(\beta_1, \beta_2) = (0.95, 0.95)$, the factor it merely a large spike which quickly converges to 1\\
+\\
+Consider the derivative of $\rho$ with respect to $t$:
+\begin{align*}
+	\frac{d\rho}{dt} &= \cfrac{-\frac{\beta_2^{t}\log\beta_2(1-\beta_1^{t})}{2\sqrt{1-\beta_1^{t}}} + \sqrt{1-\beta_2^{t}} \beta_1^{t}\log\beta_1}{(1-\beta_1^{t})^2} \\
+\end{align*}
+where $\log$ denotes the natural logarithm. \\
+Since $\log\beta_i < 0$ for any $\beta_i \in (0,1)$, we note that $\rho$ has positive $t$-derivative if and only if  
+\[
+\frac{\beta_2^{t}|\log(\beta_2)| }{2(1-\beta_2^{t})} > \frac{\beta_1^{t}|\log(\beta_1)|}{1-\beta_1^{t}}
+\]
 \subsection*{Experimental Outline}
 We conduct a number of experiment in both a vision and language setting. \\
 In the vision setting, we consider:
@@ -539,7 +614,7 @@ In the vision setting, we consider:
 \end{itemize}
 We consider both the pre-training and fine-tuning setting for CIFAR100/TinyImagenet and just the pretraining setting for CIFAR10.\\
 \\
-In the case of pretraining language models, we restrict our attention to transformer based models. In particular we make use of the \href{following implementation}{https://github.com/Niccolo-Ajroldi/plainLM/tree/main} of nanoGPT (\cite{Karpathy2022})\\
+In the case of pretraining language models, we restrict our attention to transformer based models. In particular we make use of the \href{https://github.com/Niccolo-Ajroldi/plainLM/tree/main}{following enhanced implementation} of nanoGPT (\cite{Karpathy2022}) which includes 
 \\
 We note that the exact hyperparemeter configuration used for each experiment is not of integral importance in distinguishing the performance of AdamW with and without bias correction (and indeed zero-initialistion). In each case, we run a sweep to ensure a model of near SOTA performance but this is mainly for vanity and we also consider results across a wide range of hyperparameters to prove the performance similarities are consistent across the space of all hyperparameter configurations. 
 
@@ -571,26 +646,38 @@ Discussed how bias correction looks a bit like lr scheduling
 \chapter{Beyond Adam: Is Muon the future?}
 In recent years, there have been a number of papers which attempt to improve upon Adam(W) by leveraging information about the structure of individual layers. \\
 Newton's method, which requires explicit computation of the Hessian matrix is rarely sufficiently efficient, or even tractable, in deep learning. Similarly, Natural Gradient Descent \cite{NGdescent} makes use of the Fischer information matrix which involves 
-The general principle of stochastic optimizers in the age of deep learning is to extract local information about the curvature of the loss landscape without needing to explicitely compute the full second derivative. \\
+A general principle of stochastic optimizers in the age of deep learning is to approximate local information about the curvature of the loss landscape without needing to explicitely compute the full second derivative. Knowledge of local curvature is known to help prevent becoming stuck in bad local minima.   \\
 \\
 \\
-We denote an arbitrary deep neural network as $f:\mathcal{X} \times \Theta \to \mathcal{Y}$ with $\Theta \subset \R^{p}$. The textbook definition of most traditional stochastic optimization algorithms involves initialising $\theta_0 \in \Theta$ and then updating with some rule 
+Let $f:\mathcal{X} \times \Theta \to \mathcal{Y}$ with $\Theta \subset \R^{p}$ denote an arbirary deep neural . The textbook definition of most traditional stochastic optimization algorithms involves initialising $\theta_0 \in \Theta$ and then updating with some rule 
 \[
 \theta_{t+1} = \theta_t - \eta_t s_t
 \] 
-for a step size $s_t \in \R^{d}$ which typically depends on the current batch data and weights $\theta_t$. This presentation views the parameters of a single vector. \\
-The truth is a little bit more complicated. Deep neural networks consist of several layers 
+for a step size $s_t \in \R^{d}$ which typically depends on the current stochastic gradient.  \\
+The vast majority of commonly-used first-order optimizers (e.g. SGD, RMSProp, Adadelta AdamW, Lion) ignore the structure of each individual layer of weights of a deep neural network and treat the parameters simply as a long concatenated vector made up of the flattened parameters of each layer. \\
+\\
+An idea which has regained popularity in recent years is to consider the individual structure of each layer of the matrix and leverage this structural information to obtain a better update direction bespoke to each layer. \\
+The 
+The library \href{https://github.com/modula-systems/modula}{Modula} is built precisely on this notion, explicitely constructing a mathematical object called a \textit{module} (not to be confused with the traditional interpretation in commutative algebra). These 
+\\
+A current SOTA language model is \cite{moonshot}, which uses a  mixture of experts (MoE) transformer model architecture. The model explicitely uses Muon to optimizer linear (non-embedding) layers. Namely 
 \\
 
 \section{Understanding Muon}
-The idea for the Muon Optimizer originated from the 
+The idea of Muon stemmed from (\todo{cite the modular norm papers from bernstein})
+\\
+We reiterate the explanation from \cite{bernstein2025deriving} with some additional pedagogy. 
+The essential idea behind Muon updates 
 
-
-
+\subsection{The Newton Schulz Algorithm}
+Under the framework of steepest descent under the RMS $\to$ RMS norm, the crucial step size for linear layers is seen as 
 \section{Ablations on Simple Problems}
 To gain a better understanding of the dynamics of Muon, we study its behavior in simplified settings using both synthetic data and common toy datasets. Our goal is to examine how Muon compares to SGD and AdamW in these controlled environments, and to identify the minimal conditions under which Muon offers practical advantages.
+\\
+The experiments were all run with the \href{https://github.com/sam-laing/optimizer_playground/tree/main}{following codebase}
+
 \subsection{Linear Regression}
-We consider the case of linear regression with a multi-dimensional output. This is the simplest setting in which Muon can be applied as the weights for the one-dimensional output case would not admit a matrix structure. 
+We consider the case of linear regression with a multi-dimensional output. Namely, consider a datasetThis is the simplest setting in which Muon can be applied as the weights for the one-dimensional output case would not admit a matrix structure. 
 Here the dynamics of stochastic optimizers are generally well understood. We strive to understand how Muon behaves in this setting and how it differs from SGD and AdamW. We generate a synthetic dataset as follows:
 \begin{itemize}
 	\item Generate data $Z\in \R^{Nxd}$ with $z_{ij}\sim \mathcal{N}(0,1)$ (corresponding to $N$ datapoints $x_i \in\R^{d}$) and let $X = [1 | Z] \in\R^{d+1} $ (maybe generate better data than just normal) 
@@ -609,22 +696,47 @@ L(W) = \|Y - XW\|_F^2 = \|\text{vec(Y - XW)}\|_2^2 = \|\text{vec}(Y) - (\mathbbm
 \end{align*}
 which is simply a quadratic function of the form $f(x) = \|y - Ax\|_2^2$ with positive-definite Hessian $2A^{T}A$. \\
 While such a simple problem admits an analytic solution (indeed $W^* = (X^{T}X)^{-1}X^{T}Y$ provided $X^{T}X$ is invertible), we study the case where the number of datapoints is large   
-
-
+\\
 We experiment with both mini-batch and full gradient methods. \\
-The gradient of $(*)$ is then given by 
+The gradient of $(*)$ is given by 
 \begin{align*}
 	\nabla_W L &= \nabla_W \text{tr}\left((Y - XW)^{T} (Y - XW)\right)\\
 		   &= \nabla_W [\text{tr}(Y^TY)  - 2\text{tr}(W^{T}X^{T} Y) + \text{tr}(W^{T}X^{T}XW)]   \\
 		   &= 2X^{T}(XW - Y)
 \end{align*}
-The stochastic gradient for minibatch $(X_t, Y_t)\subset \R^{N\times d} \times \R^{N\times D}$ $t\in\N$ which we will denote by $G_t$ is given by 
+The stochastic gradient for minibatch $(X_t, Y_t)\subset \R^{N\times d} \times \R^{N\times D}$ $t\in\N$, which we denote by $G_t$, is given by 
 \[
 	G_t = \nabla_{W_t} L(W_t) = 2X_t^{T} (X_tW_t - Y_t)
 \]
 Since the Muon update dictates considering NewtonSchulz$_n(G_t)$ which is just an approximation of the orthogonalization of $G_t$, we will study the singular value decomposition of $G$ at each time step and study how a variety of factors 
-\subsection*{}
+\\
+It is well established that the condition number of the feature matrix is a good indicator of the problem's numerical stability and learning difficulty. Therefore we are interested in the interplay between 
+\subsection{Logistic Regression}
+Similarly to the Linear regression case, we consider multi-class classification with a softmax function. Again, because we are interested in the Muon optimizer, this is the simplest case for which the weights admit a natural matrix structure. 
+\\
+One can view Logistic regression as a neural network of just one layer so it is certainly worthy of scrutiny.  
+\begin{itemize}
+\item Generate $X$ and  $W^*$ as in the linear regression case
+\item  Let $Z = XW^*$ and  $P = \text{softmax}(Z) + \varepsilon $ for noise $\varepsilon $
+\item  Define $Y_{ik} := \begin{cases}
+		1, \quad &\text{if $k = \text{argmax}_{\ell \in \{1,\ldots,K\} } P_{i\ell} $}\\
+		0, &\text{else}
+\end{cases}$\ \ \  for each $i \in\{1,\ldots,N\} $ (or in plain english: each row of $Y$ is a one hot encoded vector in $\R^{K}$)
+\item Initialise a random $W\in \R^{(d+1) \times D}$ and compare different optimizer's performance on minimizing loss. 
+\end{itemize}
+Let $f(X ; W) := \text{softmax}(XW)$
+As is standard for classification, we consider the cross-entropy loss:
+\[
+L(W) = - \cfrac{1}{N} \sum_{i = 1}^{N} \sum_{k=1}^{K} {Y_{ik} \log(P_{ik})} \quad \text{where } P = \text{softmax}(XW)
+\]
+Let us compute the gradient. We denote $P = \text{softmax}(Z)$  where $Z := XW$. We invoke the chain rule to simplify matters: 
+\begin{align*}
+\nabla_W L = \nabla_Z L\  . \nabla_W Z = \frac{1}{N} X^{T} (\text{softmax}(XW) - Y)
+\end{align*}
 
+\section{SVD structural analysis}
+
+\subsection{CIFAR10 RetNet}
 
 \bibliographystyle{plain}
 \bibliography{bibliography}
