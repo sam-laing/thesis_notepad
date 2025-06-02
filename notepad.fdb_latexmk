@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex notepad"] 1748182839 "notepad.aux" "notepad.bbl" "notepad" 1748209686
+["bibtex notepad"] 1748595515 "notepad.aux" "notepad.bbl" "notepad" 1748595515
   "/usr/share/texlive/texmf-dist/bibtex/bst/base/plain.bst" 1292289607 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "bibliography.bib" 1748005951 1348 f084a692ded366d572c82231c83719f0 ""
-  "notepad.aux" 1748209685 4229 56c5809266ef2eb5663a0b59d6aa57bf "pdflatex"
+  "bibliography.bib" 1748595513 1693 7dd212ba995e70ad5341d49504d039d5 ""
+  "notepad.aux" 1748267565 4230 01292dd0ae9c1f930cbf83c44f0a2c4a "pdflatex"
   (generated)
   "notepad.bbl"
   "notepad.blg"
-["pdflatex"] 1748209684 "notepad.tex" "notepad.pdf" "notepad" 1748209686
+["pdflatex"] 1748267564 "notepad.tex" "notepad.pdf" "notepad" 1748595515
   "/etc/texmf/web2c/texmf.cnf" 1698408728 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/slaing/.texlive2021/texmf-var/fonts/pk/ljfour/public/bbm/bbm12.600pk" 1744567824 8424 b6c8a8138ef054056acec6f4065e0765 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
@@ -225,12 +225,12 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1644012257 39432 7155514e09a3d69036fac785183a21c2 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1747595559 4073795 a82a847ac97773bf4a607ab050efa3a1 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1747595567 1435823 2e97d97270ed0f3d13e71773a64ac733 ""
-  "images//bias_correction_factor1.pdf" 1748209683 17725 2699a5b5850a308c7c63f9f5dd8451de ""
-  "notepad.aux" 1748209685 4229 56c5809266ef2eb5663a0b59d6aa57bf "pdflatex"
-  "notepad.bbl" 1748182839 837 79eabcac0380fbe9d8c3b1178003cbb5 "bibtex notepad"
-  "notepad.out" 1748209685 3349 fe5b7c11184876bd3c928f46d53ec5da "pdflatex"
-  "notepad.tex" 1748182838 46164 8523d2333f482be0a481e02b3ce64aa4 ""
-  "notepad.toc" 1748209685 1605 701acd54e9fedb65e948ba168cb9c514 "pdflatex"
+  "images//bias_correction_factor1.pdf" 1748246481 18118 2ef646cb623c666bd6500266cbe58153 ""
+  "notepad.aux" 1748267565 4230 01292dd0ae9c1f930cbf83c44f0a2c4a "pdflatex"
+  "notepad.bbl" 1748595515 837 79eabcac0380fbe9d8c3b1178003cbb5 "bibtex notepad"
+  "notepad.out" 1748267565 3354 cbec8e3be24465cf822785a70b51ad32 "pdflatex"
+  "notepad.tex" 1748267562 46991 57da84ce4b4b26d3a6a6dac968eb01c2 ""
+  "notepad.toc" 1748267565 1606 7758de1ba752b9bdefb7df1a5d5397ec "pdflatex"
   (generated)
   "notepad.aux"
   "notepad.log"

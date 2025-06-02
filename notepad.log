@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2025.5.18)  25 MAY 2025 23:48
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2025.5.18)  26 MAY 2025 15:52
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -937,11 +937,11 @@ Underfull \vbox (badness 2269) has occurred while \output is active []
 LaTeX Font Info:    Trying to load font information for U+bbm on input line 696.
  (/usr/share/texlive/texmf-dist/tex/latex/bbm-macros/ubbm.fd
 File: ubbm.fd 1999/03/15 V 1.2 Font definition for bbm font - TH
-) [18] (./notepad.bbl [19] [20]) [21
+) [18] [19] (./notepad.bbl [20]) [21
 
 ] (./notepad.aux)
 Package rerunfilecheck Info: File `notepad.out' has not changed.
-(rerunfilecheck)             Checksum: FE5B7C11184876BD3C928F46D53EC5DA;3349.
+(rerunfilecheck)             Checksum: CBEC8E3BE24465CF822785A70B51AD32;3354.
  ) 
 Here is how much of TeX's memory you used:
  27277 strings out of 480171
@@ -952,10 +952,10 @@ Here is how much of TeX's memory you used:
  59 hyphenation exceptions out of 8191
  114i,14n,118p,771b,408s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/slaing/.texlive2021/texmf-var/fonts/pk/ljfour/public/bbm/bbm12.600pk>{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/rsfs/rsfs10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on notepad.pdf (21 pages, 175099 bytes).
+Output written on notepad.pdf (21 pages, 178236 bytes).
 PDF statistics:
- 343 PDF objects out of 1000 (max. 8388607)
- 261 compressed objects within 3 object streams
+ 344 PDF objects out of 1000 (max. 8388607)
+ 262 compressed objects within 3 object streams
  56 named destinations out of 1000 (max. 500000)
  162 words of extra memory for PDF output out of 10000 (max. 10000000)
 

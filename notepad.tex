@@ -597,12 +597,12 @@ For the pair $(\beta_1, \beta_2) = (0.9, 0.999)$, the factor resembles a very st
 \\
 Consider the derivative of $\rho$ with respect to $t$:
 \begin{align*}
-	\frac{d\rho}{dt} &= \cfrac{-\frac{\beta_2^{t}\log\beta_2(1-\beta_1^{t})}{2\sqrt{1-\beta_1^{t}}} + \sqrt{1-\beta_2^{t}} \beta_1^{t}\log\beta_1}{(1-\beta_1^{t})^2} \\
+	\frac{d\rho}{dt} &= \cfrac{-\frac{\beta_2^{t}\log\beta_2(1-\beta_1^{t})}{2\sqrt{1-\beta_2^{t}}} + \sqrt{1-\beta_2^{t}} \beta_1^{t}\log\beta_1}{(1-\beta_1^{t})^2} \\
 \end{align*}
 where $\log$ denotes the natural logarithm. \\
 Since $\log\beta_i < 0$ for any $\beta_i \in (0,1)$, we note that $\rho$ has positive $t$-derivative if and only if  
 \[
-\frac{\beta_2^{t}|\log(\beta_2)| }{2(1-\beta_2^{t})} > \frac{\beta_1^{t}|\log(\beta_1)|}{1-\beta_1^{t}}
+\frac{\beta_2^{t}\log(\beta_2) }{2(1-\beta_2^{t})} < \frac{\beta_1^{t}\log(\beta_1)}{1-\beta_1^{t}}
 \]
 \subsection*{Experimental Outline}
 We conduct a number of experiment in both a vision and language setting. \\
@@ -708,6 +708,16 @@ The stochastic gradient for minibatch $(X_t, Y_t)\subset \R^{N\times d} \times \
 \[
 	G_t = \nabla_{W_t} L(W_t) = 2X_t^{T} (X_tW_t - Y_t)
 \]
+We consider the singular value decomposition (SVD) $X = U \Sigma V^{T}$ of the feature matrix. 
+\\
+Then the gradient $G$ (up to a constant) is given by:
+ \[
+G = X^{T}(XW - Y) = V\Sigma ^{T} U^{T}(U\Sigma V^{T} W - Y) = V^{T}\Sigma^{T}\Sigma \ VW - V\Sigma^{T} U Y
+\]
+The analytic solution (obtained at $G = 0$ due to convexity) is given by:
+\[
+	(X^{T}X)^{-1}X^{T}Y = V \Sigma^{-2}V^{T} V \Sigma U^{T}Y = V \Sigma ^{-1} U^{T}Y 
+\] 
 Since the Muon update dictates considering NewtonSchulz$_n(G_t)$ which is just an approximation of the orthogonalization of $G_t$, we will study the singular value decomposition of $G$ at each time step and study how a variety of factors 
 \\
 It is well established that the condition number of the feature matrix is a good indicator of the problem's numerical stability and learning difficulty. Therefore we are interested in the interplay between 
@@ -736,8 +746,16 @@ Let us compute the gradient. We denote $P = \text{softmax}(Z)$  where $Z := XW$.
 
 \section{SVD structural analysis}
 
-\subsection{CIFAR10 RetNet}
+\subsection{CIFAR-10 ResNet}
+The \href{https://github.com/KellerJordan/cifar10-airbench}{CIFAR-10 speedrun repository} is a competitive benchmarking project. The goal is to construct a 
 
+
+
+
+Closed form for two KL divergences is 
+\[
+D_{KL}(p \,\|\, q) = \frac{1}{2} \left[ \mathrm{tr}(\Sigma_q^{-1} \Sigma_p) + (\mu_q - \mu_p)^\top \Sigma_q^{-1} (\mu_q - \mu_p) - k + \ln\left(\frac{\det\Sigma_q}{\det\Sigma_p}\right) \right]
+\] 
 \bibliographystyle{plain}
 \bibliography{bibliography}
 
