@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2025.5.18)  26 MAY 2025 15:52
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2025.5.18)  12 JUN 2025 19:43
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -27,41 +27,9 @@ File: bk12.clo 2021/10/04 v1.4n Standard LaTeX file (size option)
 LaTeX Info: Redefining \cite on input line 302.
 LaTeX Info: Redefining \nocite on input line 332.
 Package: cite 2015/02/27  v 5.5
-) (/usr/share/texlive/texmf-dist/tex/latex/psnfss/mathptmx.sty
-Package: mathptmx 2020/03/25 PSNFSS-v9.3 Times w/ Math, improved (SPQR, WaS) 
-LaTeX Font Info:    Redeclaring symbol font `operators' on input line 28.
-LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmr/m/n --> OT1/ztmcm/m/n on input line 28.
-LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmr/bx/n --> OT1/ztmcm/m/n on input line 28.
-LaTeX Font Info:    Redeclaring symbol font `letters' on input line 29.
-LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
-(Font)                  OML/cmm/m/it --> OML/ztmcm/m/it on input line 29.
-LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
-(Font)                  OML/cmm/b/it --> OML/ztmcm/m/it on input line 29.
-LaTeX Font Info:    Redeclaring symbol font `symbols' on input line 30.
-LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
-(Font)                  OMS/cmsy/m/n --> OMS/ztmcm/m/n on input line 30.
-LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
-(Font)                  OMS/cmsy/b/n --> OMS/ztmcm/m/n on input line 30.
-LaTeX Font Info:    Redeclaring symbol font `largesymbols' on input line 31.
-LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
-(Font)                  OMX/cmex/m/n --> OMX/ztmcm/m/n on input line 31.
-LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
-(Font)                  OMX/cmex/m/n --> OMX/ztmcm/m/n on input line 31.
-\symbold=\mathgroup4
-\symitalic=\mathgroup5
-LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 34.
-LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/cmr/bx/n --> OT1/ptm/bx/n on input line 34.
-LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  OT1/cmr/bx/n --> OT1/ptm/bx/n on input line 34.
-LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 35.
-LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/cmr/m/it --> OT1/ptm/m/it on input line 35.
-LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmr/bx/it --> OT1/ptm/m/it on input line 35.
-LaTeX Info: Redefining \hbar on input line 50.
+) (/usr/share/texlive/texmf-dist/tex/latex/psnfss/mathpazo.sty
+Package: mathpazo 2020/03/25 PSNFSS-v9.3 Palatino w/ Pazo Math (D.Puga, WaS) 
+\symupright=\mathgroup4
 ) (/usr/share/texlive/texmf-dist/tex/latex/booktabs/booktabs.sty
 Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 \heavyrulewidth=\dimen139
@@ -409,9 +377,9 @@ Package: inputenc 2021/02/14 v1.3d Input encoding file
 \inpenc@posthook=\toks36
 ) (/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
 Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
-LaTeX Font Info:    Trying to load font information for T1+ptm on input line 112.
- (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1ptm.fd
-File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
+LaTeX Font Info:    Trying to load font information for T1+ppl on input line 112.
+ (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1ppl.fd
+File: t1ppl.fd 2001/06/04 font definitions for T1/ppl.
 )) (/usr/share/texlive/texmf-dist/tex/latex/base/textcomp.sty
 Package: textcomp 2020/02/02 v2.0n Standard LaTeX package
 ) (/usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty
@@ -438,8 +406,9 @@ Package babel Info: Hyphen rules for 'newzealand' set to \l@english
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
-\symAMSa=\mathgroup6
-\symAMSb=\mathgroup7
+\symAMSa=\mathgroup5
+\symAMSb=\mathgroup6
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 )) (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/euscript.sty
@@ -754,32 +723,38 @@ Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
 )
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 )
-LaTeX Font Info:    Trying to load font information for OT1+ztmcm on input line 87.
- (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ztmcm.fd
-File: ot1ztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OT1/ztmcm.
+LaTeX Font Info:    Trying to load font information for OT1+ppl on input line 87.
+ (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ppl.fd
+File: ot1ppl.fd 2001/06/04 font definitions for OT1/ppl.
 )
-LaTeX Font Info:    Trying to load font information for OML+ztmcm on input line 87.
- (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omlztmcm.fd
-File: omlztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OML/ztmcm.
+LaTeX Font Info:    Trying to load font information for OML+zplm on input line 87.
+ (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omlzplm.fd
+File: omlzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OML/zplm.
 )
-LaTeX Font Info:    Trying to load font information for OMS+ztmcm on input line 87.
- (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsztmcm.fd
-File: omsztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMS/ztmcm.
+LaTeX Font Info:    Trying to load font information for OMS+zplm on input line 87.
+ (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omszplm.fd
+File: omszplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMS/zplm.
 )
-LaTeX Font Info:    Trying to load font information for OMX+ztmcm on input line 87.
- (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omxztmcm.fd
-File: omxztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMX/ztmcm.
+LaTeX Font Info:    Trying to load font information for OMX+zplm on input line 87.
+ (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omxzplm.fd
+File: omxzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMX/zplm.
 )
-LaTeX Font Info:    Trying to load font information for OT1+ptm on input line 87.
- (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ptm.fd
-File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
+LaTeX Font Info:    Trying to load font information for OT1+zplm on input line 87.
+ (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1zplm.fd
+File: ot1zplm.fd 2002/09/08 Fontinst v1.914 font definitions for OT1/zplm.
 )
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 87.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 87.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 87.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 15.0049pt on input line 87.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 10.42007pt on input line 87.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 8.33606pt on input line 87.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 15.0049pt on input line 87.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 10.42007pt on input line 87.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 8.33606pt on input line 87.
 
 
 LaTeX Warning: No \author given.
@@ -790,12 +765,18 @@ LaTeX Warning: No \author given.
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2
 
 ] (./notepad.toc
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 3.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 3.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 3.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 12.50409pt on input line 4.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 9.37807pt on input line 4.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 7.29405pt on input line 4.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 12.50409pt on input line 4.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 9.37807pt on input line 4.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 7.29405pt on input line 4.
 )
 \tf@toc=\write6
 \openout6 = `notepad.toc'.
@@ -805,157 +786,213 @@ Underfull \hbox (badness 10000) in paragraph at lines 284--287
 
  []
 
-[3] [4]
-Chapter 1.
+[3]
+LaTeX Font Info:    Trying to load font information for U+fplmbb on input line 290.
+ (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ufplmbb.fd
+File: ufplmbb.fd 2003/10/30 Fontinst v1.914 font definitions for U/fplmbb.
+)
+Underfull \vbox (badness 1210) has occurred while \output is active []
 
-Underfull \hbox (badness 10000) in paragraph at lines 332--335
-
- []
-
-
-Overfull \hbox (3.53986pt too wide) in paragraph at lines 342--342
-[][]\T1/ptm/b/n/14.4 Improving Deep Learn-ing Op-ti-miza-tion through Con-strained Pa-ram-e-ter Reg-
- []
-
-[5
-
-] Excluding 'comment' comment. [6]
-Chapter 2.
-[7
-
-] [8
+ [4] [5] [6
 
 ]
-Chapter 3.
-LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 429.
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd
-File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
-)
-Overfull \hbox (6.0394pt too wide) in paragraph at lines 433--434
-[]\T1/ptm/m/n/12 The BACK-Pack pack-age ex-per-i-ment with class vari-ances in-di-vid-ual. Re-la-tion-ship to signSGD
+Chapter 1.
+[7] [8
+
+]
+Chapter 2.
+
+Underfull \hbox (badness 10000) in paragraph at lines 334--337
+
  []
 
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <17.28> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 435.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 435.
 
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 435.
+Overfull \hbox (0.45958pt too wide) in paragraph at lines 345--348
+\T1/ppl/m/n/12 This pa-per in-tro-duces an in-ter-est-ing ad-just-ment to the tra-di-tional weight de-cay paradigm.
+ []
 
 
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\varepsilon' on input line 435.
+Underfull \vbox (badness 5274) has occurred while \output is active []
 
+ [9] Excluding 'comment' comment. [10]
+Chapter 3.
+[11
 
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 435.
+] [12
 
-[9] [10]
+]
 Chapter 4.
 
+Underfull \hbox (badness 10000) in paragraph at lines 426--431
+
+ []
+
+
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [11
+ [13]
+LaTeX Font Info:    Trying to load font information for TS1+ppl on input line 439.
+ (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ppl.fd
+File: ts1ppl.fd 2001/06/04 font definitions for TS1/ppl.
+)
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 446.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\varepsilon' on input line 446.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 446.
+
+
+Overfull \hbox (31.83551pt too wide) in paragraph at lines 458--461
+\T1/ppl/m/n/12 The mo-men-tum and RMS boil down to keep-ing track of a mov-ing av-er-age ($[][]$) parametrized
+ []
+
+[14] [15] [16
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 503--507
-
- []
-
-[12]
-Overfull \hbox (27.72444pt too wide) detected at line 556
- \OT1/ztmcm/m/n/12 =[]\OMS/ztmcm/m/n/12 )  [] \OT1/ztmcm/m/n/12 = \OML/ztmcm/m/it/12 s[] \OT1/ztmcm/m/n/12 = [] = []
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 556--563
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 565--569
-
- []
-
-[13]
-Underfull \hbox (badness 10000) in paragraph at lines 586--589
-
- []
-
-</home/slaing/ML/thesis/thesis_notepad/images//bias_correction_factor1.pdf, id=176, 400.0458pt x 339.1227pt>
-File: /home/slaing/ML/thesis/thesis_notepad/images//bias_correction_factor1.pdf Graphic file (type pdf)
-<use /home/slaing/ML/thesis/thesis_notepad/images//bias_correction_factor1.pdf>
-Package pdftex.def Info: /home/slaing/ML/thesis/thesis_notepad/images//bias_correction_factor1.pdf  used on input line 594.
-(pdftex.def)             Requested size: 400.04482pt x 339.12186pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 591--599
-
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [14] [15 </home/slaing/ML/thesis/thesis_notepad/images//bias_correction_factor1.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 615--620
-
- []
-
-[16]
 Chapter 5.
 
-Underfull \hbox (badness 10000) in paragraph at lines 647--653
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [17]
+Underfull \hbox (badness 10000) in paragraph at lines 505--510
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 647--653
+Underfull \hbox (badness 10000) in paragraph at lines 513--517
+
+ []
+
+[18]
+Overfull \hbox (72.96866pt too wide) detected at line 566
+ \OT1/zplm/m/n/12 =[]\OMS/zplm/m/n/12 )  [] \OT1/zplm/m/n/12 = \OML/zplm/m/it/12 s[] \OT1/zplm/m/n/12 = [] = []
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 566--573
 
  []
 
 
-Overfull \hbox (6.20868pt too wide) in paragraph at lines 655--665
-\T1/ptm/m/n/12 The vast ma-jor-ity of commonly-used first-order op-ti-miz-ers (e.g. SGD, RM-SProp, Adadelta AdamW,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 655--665
+Underfull \hbox (badness 10000) in paragraph at lines 575--579
 
  []
 
+[19]
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 7.91925pt on input line 599.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 6.25204pt on input line 599.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 7.91925pt on input line 599.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 6.25204pt on input line 599.
 
-Underfull \hbox (badness 10000) in paragraph at lines 655--665
+Underfull \hbox (badness 10000) in paragraph at lines 596--600
+
+ []
+
+</home/slaing/ML/thesis/thesis_notepad/images//bias_correction_factor1.pdf, id=260, 400.0458pt x 339.1227pt>
+File: /home/slaing/ML/thesis/thesis_notepad/images//bias_correction_factor1.pdf Graphic file (type pdf)
+<use /home/slaing/ML/thesis/thesis_notepad/images//bias_correction_factor1.pdf>
+Package pdftex.def Info: /home/slaing/ML/thesis/thesis_notepad/images//bias_correction_factor1.pdf  used on input line 608.
+(pdftex.def)             Requested size: 400.04482pt x 339.12186pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 604--613
 
  []
 
 
-Underfull \vbox (badness 2269) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [17
+ [20] [21 </home/slaing/ML/thesis/thesis_notepad/images//bias_correction_factor1.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 630--636
 
-]
-LaTeX Font Info:    Trying to load font information for U+bbm on input line 696.
+ []
+
+
+Overfull \hbox (1.71991pt too wide) in paragraph at lines 630--636
+\T1/ppl/m/n/12 mod-els. In par-tic-u-lar we make use of the [][]fol-low-ing en-hanced im-ple-men-ta-tion[][] of nanoGPT
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 630--636
+
+ []
+
+
+Overfull \hbox (3.49748pt too wide) in paragraph at lines 642--649
+ [][] 
+ []
+
+[22]
+Chapter 6.
+
+Underfull \hbox (badness 10000) in paragraph at lines 654--660
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 654--660
+
+ []
+
+
+Overfull \hbox (1.9844pt too wide) in paragraph at lines 662--671
+\T1/ppl/m/n/12 The vast ma-jor-ity of commonly-used first-order op-ti-miz-ers (e.g. SGD, RM-SProp, Adadelta
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 662--671
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 662--671
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 673--678
+
+ []
+
+[23
+
+] [24]
+LaTeX Font Info:    Trying to load font information for U+bbm on input line 713.
  (/usr/share/texlive/texmf-dist/tex/latex/bbm-macros/ubbm.fd
 File: ubbm.fd 1999/03/15 V 1.2 Font definition for bbm font - TH
-) [18] [19] (./notepad.bbl [20]) [21
+) [25]
+Overfull \hbox (6.12325pt too wide) in paragraph at lines 766--770
+\T1/ppl/m/n/12 set ac-cu-racy in the short-est pos-si-ble train-ing time (stan-dard-ized in NVIDIA A100-minutes).
+ []
 
-] (./notepad.aux)
+(./notepad.bbl [26] [27] [28
+
+]) [29] (./notepad.aux)
 Package rerunfilecheck Info: File `notepad.out' has not changed.
-(rerunfilecheck)             Checksum: CBEC8E3BE24465CF822785A70B51AD32;3354.
+(rerunfilecheck)             Checksum: F69FD6622AA180D45A87A6C38238E590;5140.
  ) 
 Here is how much of TeX's memory you used:
- 27277 strings out of 480171
- 511549 string characters out of 5894489
- 783333 words of memory out of 5000000
- 44652 multiletter control sequences out of 15000+600000
- 543681 words of font info for 155 fonts, out of 8000000 for 9000
+ 27393 strings out of 480171
+ 513153 string characters out of 5894489
+ 783907 words of memory out of 5000000
+ 44723 multiletter control sequences out of 15000+600000
+ 527712 words of font info for 170 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
- 114i,14n,118p,771b,408s stack positions out of 5000i,500n,10000p,200000b,80000s
- </home/slaing/.texlive2021/texmf-var/fonts/pk/ljfour/public/bbm/bbm12.600pk>{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/rsfs/rsfs10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on notepad.pdf (21 pages, 178236 bytes).
+ 114i,14n,118p,771b,412s stack positions out of 5000i,500n,10000p,200000b,80000s
+ </home/slaing/.texlive2021/texmf-var/fonts/pk/ljfour/public/bbm/bbm12.600pk>{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/mathpazo/fplmbb.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/mathpazo/fplmr.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
+Output written on notepad.pdf (29 pages, 203860 bytes).
 PDF statistics:
- 344 PDF objects out of 1000 (max. 8388607)
- 262 compressed objects within 3 object streams
- 56 named destinations out of 1000 (max. 500000)
- 162 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 453 PDF objects out of 1000 (max. 8388607)
+ 364 compressed objects within 4 object streams
+ 85 named destinations out of 1000 (max. 500000)
+ 242 words of extra memory for PDF output out of 10000 (max. 10000000)
 

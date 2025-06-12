@@ -1,7 +1,7 @@
 \documentclass[12pt]{book}
 
-\usepackage{cite} % optional, for nicer citation formatting
-\usepackage{mathptmx}
+\usepackage{cite} 
+\usepackage{mathpazo}
 \usepackage{booktabs}
 \usepackage{bbm}
 \usepackage{tikz-cd,mathtools}
@@ -322,6 +322,8 @@ Getting the following convergence guarantee:
 					  &= \sum_{j=0}^{k} {\eta_{k-j}P_j E[\|s_j\|]}  \quad (\text{since the first term should be 0) }
 \end{align*}
 The expected value of the norm of $w_0$ should be 0 in most initialization schemes
+
+\chapter{Introduction}
 \chapter{Paper Review}
 
 
@@ -417,12 +419,20 @@ however the wd update insists
 
 
 \chapter{Understanding Adam}
+\label{chap: Understanding Adam}
 We discuss some of the underlying theory, review some important literature and run some experiments with the aim of understanding the dynamics of AdamW and the role which each hyperparameter plays in Adam's efficacy.\\
 Experiments 
 \section{Why is AdamW the Top Dog?}
+The Adam optimizer \cite{kingma2017adammethodstochasticoptimization}  was introduced in 2017. With the addition of decoupled weight decay \cite{loshchilov2019decoupledweightdecayregularization}, it has been the de facto stochastic optimizer choice for nearly all SOTA deep learning training, particularly in language model pretraining. Extensive research into understanding Adam's dynamics has been conducted  \\
+\\
+The optimizer itself is merely a synthesis of two already well-established optimization ideas - momentum and RMSProp. Adam enjoys the upsides of both methods and has proved to be a powerful and robust choice   \\
 Despite extensive research into optimizers for deep learning in the past decade, AdamW remains the default choice for the vast majority of both industry and academic applications. \\
-While several 
-
+While a substantial number of publications claim great and consistent  
+\section{Preliminaries and Related Work}
+The AdamW optimizer can be represented as follows: 
+\subsection{EAdam Paper probably}
+\subsection{Relation to signSGD}
+\subsection{}
 \section{Some Experiments/Ablations}
 Need a lot of sensitivity curves for models in vision and language setting.
 \begin{itemize}
@@ -432,17 +442,18 @@ Need a lot of sensitivity curves for models in vision and language setting.
 \item Beta scheduling too with experiments about the angle between the two 
 \item The BACKPack package experiment with class variances individual. Relationship to signSGD stuff from Hennig paper.
 \end{itemize}
-\section{Why is the same $\varepsilon $ Used Everywhere?}
+\subsection{How EMA smooths the update signal}
+\subsection{The $\varepsilon $ Hyperparameter}
 While regular adam is given by:
 \[
 	w^{t+1} = w^{t} - \eta \frac{\text{EMA}_{\beta_1}(g_t)}{\sqrt{\text{EMA}_{\beta_2}(g_t ^2) } \color{red}{+ \varepsilon  }}
 \] 
 with $\varepsilon = 1e-8$ as the default choice. 
 
-It has been observed in a number of papers (epsilon stuff), that language model pretraining can be improved by altering the epsilon hyperparameter. Indeed increasing $\varepsilon $ to $1e-6$ can decrease final validation perplexity but at the cost of decreased training stability. Conversely, decreasing  $\varepsilon $ can improve stability without noticable decrease in performance. \\
+It has been observed in a number of papers (\cite{yuan2020eadamoptimizerepsilonimpact}), that language model pretraining can be improved by altering the epsilon hyperparameter. Indeed increasing $\varepsilon $ to $1e-6$ can decrease final validation perplexity but at the cost of decreased training stability. Conversely, decreasing  $\varepsilon $ can improve stability without noticable decrease in performance. \\
 In every one of these experiments, the $\varepsilon $ value is chosen to apply globally, however the 
 We consider the distribution of 
-\section{Nesting the Moving averages}
+\subsection{Nesting the Moving averages}
 \subsection*{Coupling of momentum and RMS}
 The momentum and RMS boil down to keeping track of a moving average ($\text{EMT}_{\beta}$) parametrized by $\beta\in \R_{\ge 0}$. 
 \\
@@ -459,8 +470,7 @@ Or expressed in two steps:
 	v^{t} &= \beta_2v^{t-1} + (1-\beta_2)g^{t}\odot g^{t}\\
 	K^{t} &= \beta_1K^{t-1} + (1-\beta_1) \frac{g_{t}}{\sqrt{v^{t}} + \varepsilon  }
 \end{align*}
-Of course, the 
-
+Of course, the \\
 When doing this, the bias correction term becomes less clear cut. Of course the second moment estimate $v^{t}$ is the same ($1-\beta_1^{t} $ if you believe $E[g_t]$ is similar on initialization) . But after the nested average we have a sum of the form 
 
 \[
@@ -468,11 +478,11 @@ When doing this, the bias correction term becomes less clear cut. Of course the 
 \]
 
 Can we make the same kind of assumption for initial values of $t$? Namely that $E[\frac{g_j}{\sqrt{v_j} + \varepsilon }]$ is "close enough" for all small $j$ so that we can reduce the ugly expression above to a geometric sum. If so, great the term is the same. If not, any other clever tricks? 
+\\
+Indeed as we demonstrate in detail in \ref{chap: bias correction} that bias correction is currently poorly understood and is generally not required if proper learning rate scheduling is implemented. 
 
-
-\chapter{Bias Correction is Bogus}
-The \href{https://arxiv.org/pdf/1412.6980}{Adam Optimizer} was introduced in 2017. Since then, it has been the de facto stochastic optimizer choice for nearly all SOTA deep learning training (*along the way, weight decay decoupling was added to improve the optimizer). \\
-The Adam optimizer itself is merely a synthesis of two already well-established optimization ideas - momentum and RMSProp. Adam reaps the benefits of both methods   \\
+\chapter{Bias Correction in Adam: A Detailed Analysis}
+\label{chap: bias correction}
 The AdamW optimizer can be represented as follows:(need to replace this with the algorithm itself for sure)
 \begin{equation*}
 \begin{aligned}
@@ -486,7 +496,7 @@ Where $\eta_t\in\R_{\ge_0}$ is the learning rate at time step $t$, $\alpha\in \R
 One observes in a large number of research papers (gotta find some nice examples), an extensive discussion into the role of bias correction. 
 Indeed bias correction is generally viewed by the optimization community as an inexorable component of the Adam(W) optimizer\\
 The purpose of this chapter is to discuss the role of bias correction on the performance of models trained using AdamW. For the purposes of all experiments conducted, we make use of a custom implementation of the AdamW optimizer. 
-\subsection*{A Discussion of the Proof of "Necessity" of Bias Correction}
+\subsection*{A Discussion of the "Proof" for Bias Correction}
 In a number of pedagogical resources (cite Goodfellow, Geiger lecture series), blogs and indeed seminal research papers - some variant of the following "proof" is given to justify the inclusion of bias correction:
 \begin{align*}
 	\E[m_t] &= \E\left[ (1-\beta_1)\sum_{j=1}^{t} {\beta_1^{t-i+1} g_i}  \right]  \\
@@ -497,7 +507,7 @@ It is therefore argued that dividing by  $1-\beta_1^{t}$ removes the expected "b
 Where an analogous argument is used to justify the bias correction factor for $v_t$. \\
 This assumption that $\E[g_t] \approx \E[g_i]$ for $i<t$ is patently false. We argue through a number of experiments with a custom implementation of AdamW that the bias correction step can be removed from AdamW with no adverse effects.
 \\
-In any case, the influence of bias correction to the current EMA statistics is not appreciable after a sufficient number of steps are taken. Or so this may seem:
+
 
 \subsection*{Bias Correction isn't the End of the Story}
 When initially implementing the bias correction-free version of AdamW, we assumed that initialising the moments $m_t, v_t$ with the gradients  $g_0, g_0^2$ respectively would be an effective way to remove any bias - thus eliminating the need for bias correction. However, we discovered that this is not quite as simple as initially expected. While initialising the moments as zero certainly induces a bias, it is not the same bias that is corrected by bias correction. \\
@@ -583,12 +593,16 @@ why not just divide by $1-\beta_2$? rather than $1-\beta_2^{t}$? makes no differ
 
 
 \section{Is Bias Correction just Hidden Learning rate scheduling?}
-In our experiments comparing adam with and without bias correction, we found that certain choices of the pair $\beta_1, \beta_2$ caused a much greater discrepency in performance particularly when no learning rate schedule is used. \\
+In our experiments comparing adam with and without bias correction, we found that certain choices of the pair $\beta_1, \beta_2$ caused a much greater discrepency in performance, but only when no learning rate schedule is used. This lead to the insight we present below. \\
 \\
-Consider the following factorization (we will ignore the $\varepsilon $ in the denominator for simplicity):
-\begin{align*}
+Consider the following factorization (we will ignore the $\varepsilon $ in the denominator for simplicity
+\footnotemark{}\footnotetext{We note that with $\varepsilon $ included, \ref{eq: bias factor} evaluates to $\frac{\sqrt{1-\beta_2^{t}} }{1-\beta_1^{t}} \ \frac{m_t}{\sqrt{v_t} }$}
+
+\begin{equation}
 	\frac{\hat{m}_t}{\hat{v}_t} = \cfrac{\frac{1}{1-\beta_1^{t}} m_t}{\sqrt{ \frac{1}{1-\beta_2^{t}}v_t}} = \cfrac{\sqrt{1-\beta_2^{t}} }{1-\beta_1^{t}} \ \cfrac{m_t}{\sqrt{v_t} }
-\end{align*}
+	\label{eq: bias factor}
+\end{equation}
+\href
 The behaviour of this factor $\rho(t;\beta_1,\beta_2) := \frac{\sqrt{1-\beta_2^{t}} }{1-\beta_1^{t}}$ depends greatly on the choice of $\beta_1, \beta_2\in [0, 1)$ \\
 Consider the following plot: \\
 \includegraphics{bias_correction_factor1.pdf}
@@ -604,21 +618,21 @@ Since $\log\beta_i < 0$ for any $\beta_i \in (0,1)$, we note that $\rho$ has pos
 \[
 \frac{\beta_2^{t}\log(\beta_2) }{2(1-\beta_2^{t})} < \frac{\beta_1^{t}\log(\beta_1)}{1-\beta_1^{t}}
 \]
+As we can see, in the case of $(\beta_1, \beta_2) = (0.95, 0.95)$, the derivative is \textit{never} positive. 
 \subsection*{Experimental Outline}
 We conduct a number of experiment in both a vision and language setting. \\
 In the vision setting, we consider:
 \begin{itemize}
 \item A less overparametrized ResNet implementation on the CIFAR10 dataset (only $\sim 1$M parameters rather than ResNet 18 which has $\sim 11$M)
-\item Both a ResNet50 and a vision transformer on the CIFAR100 dataset
+\item Both a ResNet56\footnotemark{}\footnotetext{Pytorch's ResNet50 was specifically designed for Imagenet's $224\times 224$ images and applies agressive downsampling in the early layers. When applied to CIFAR-100's $32\times 32$ images, important information is then lost and . We therefore make use of a commonly-used specialised ResNet architecture \cite{Idelbayev18a} } and a vision transformer on the CIFAR100 dataset
 \item Both a ResNet50 and a vision transformer on the Tiny Imagenet and Imagenet datsets
 \end{itemize}
 We consider both the pre-training and fine-tuning setting for CIFAR100/TinyImagenet and just the pretraining setting for CIFAR10.\\
 \\
-In the case of pretraining language models, we restrict our attention to transformer based models. In particular we make use of the \href{https://github.com/Niccolo-Ajroldi/plainLM/tree/main}{following enhanced implementation} of nanoGPT (\cite{Karpathy2022}) which includes 
+In the case of pretraining language models, we restrict our attention to transformer based models. In particular we make use of the \href{https://github.com/Niccolo-Ajroldi/plainLM/tree/main}{following enhanced implementation} of nanoGPT (\cite{Karpathy2022}) including RMSNorm (instead of batch/layer normalization), SwiGLUi\cite{swiGLU} and Rotary Positional Embedding
 \\
 We note that the exact hyperparemeter configuration used for each experiment is not of integral importance in distinguishing the performance of AdamW with and without bias correction (and indeed zero-initialistion). In each case, we run a sweep to ensure a model of near SOTA performance but this is mainly for vanity and we also consider results across a wide range of hyperparameters to prove the performance similarities are consistent across the space of all hyperparameter configurations. 
-
-
+\\
 
 \begin{table}[h]
 \centering
@@ -636,16 +650,9 @@ Val ppl & $21.87 \pm 0.11$ & $21.93 \pm 0.04$ & $22.83 \pm 0.15$ & $22.64 \pm 0.
 It appears that what is far more important than the inclusion of bias correction is rather the initialization of the moments. One would naively assume that initializing the gradients to what they actually are should outperform setting them to zero. However there are minor improvements to initialising at zero 
 
 
-
-
-\subsection*{Some scratchings about learning rate perspective on AdamW}
-
-Discussed how bias correction looks a bit like lr scheduling
-
-
 \chapter{Beyond Adam: Is Muon the future?}
 In recent years, there have been a number of papers which attempt to improve upon Adam(W) by leveraging information about the structure of individual layers. \\
-Newton's method, which requires explicit computation of the Hessian matrix is rarely sufficiently efficient, or even tractable, in deep learning. Similarly, Natural Gradient Descent \cite{NGdescent} makes use of the Fischer information matrix which involves 
+Newton's method, which requires explicit computation of the Hessian matrix, is rarely sufficiently efficient, or even tractable, in deep learning. Similarly, Natural Gradient Descent \cite{NGdescent} makes use of the Fischer information matrix \\
 A general principle of stochastic optimizers in the age of deep learning is to approximate local information about the curvature of the loss landscape without needing to explicitely compute the full second derivative. Knowledge of local curvature is known to help prevent becoming stuck in bad local minima.   \\
 \\
 \\
@@ -656,21 +663,31 @@ Let $f:\mathcal{X} \times \Theta \to \mathcal{Y}$ with $\Theta \subset \R^{p}$ d
 for a step size $s_t \in \R^{d}$ which typically depends on the current stochastic gradient.  \\
 The vast majority of commonly-used first-order optimizers (e.g. SGD, RMSProp, Adadelta AdamW, Lion) ignore the structure of each individual layer of weights of a deep neural network and treat the parameters simply as a long concatenated vector made up of the flattened parameters of each layer. \\
 \\
-An idea which has regained popularity in recent years is to consider the individual structure of each layer of the matrix and leverage this structural information to obtain a better update direction bespoke to each layer. \\
-The 
+An idea which has regained popularity in recent years is to exploit the individual structure of each layer of the matrix, leveraging this information to compute update directions tailored to each layer. \\ 
 The library \href{https://github.com/modula-systems/modula}{Modula} is built precisely on this notion, explicitely constructing a mathematical object called a \textit{module} (not to be confused with the traditional interpretation in commutative algebra). These 
 \\
-A current SOTA language model is \cite{moonshot}, which uses a  mixture of experts (MoE) transformer model architecture. The model explicitely uses Muon to optimizer linear (non-embedding) layers. Namely 
+A current SOTA language model is \cite{moonshot}, which uses a  mixture of experts (MoE) transformer model architecture. The model explicitely uses Muon to optimizer linear (non-embedding) layers. Namely
 \\
-
+\section{Related Work}
 \section{Understanding Muon}
 The idea of Muon stemmed from (\todo{cite the modular norm papers from bernstein})
 \\
-We reiterate the explanation from \cite{bernstein2025deriving} with some additional pedagogy. 
-The essential idea behind Muon updates 
+The following exposition builds on the work of \cite{bernstein2024modulardualitydeeplearning}, \cite{bernstein2025deriving}, \cite{jordan2024muon}, \cite{pethick2025trainingdeeplearningmodels} supplemented with some additional pedagogy and proofs.
+\todo{give a nice Muon explanation}
+\\
 
+\subsection{Metrized Deep Learning}
+
+\subsection{Dualized Gradients and Metrized Deep Learning}
+The paper \cite{bernstein2024modulardualitydeeplearning} reviatalizes an old principle in optimization theory. Namely, the insistance on viewing the gradient as a dual vector. \\
+Consider a differentiable loss function $L:\Theta \to \R_{\ge_0}$ with respect to the weight space $\Theta \subseteq \R^{d}$. One can consider the first order Taylor approximation of $L$ about arbitrary
+\[
+ L(
+\] 
 \subsection{The Newton Schulz Algorithm}
 Under the framework of steepest descent under the RMS $\to$ RMS norm, the crucial step size for linear layers is seen as 
+
+
 \section{Ablations on Simple Problems}
 To gain a better understanding of the dynamics of Muon, we study its behavior in simplified settings using both synthetic data and common toy datasets. Our goal is to examine how Muon compares to SGD and AdamW in these controlled environments, and to identify the minimal conditions under which Muon offers practical advantages.
 \\
@@ -743,20 +760,17 @@ Let us compute the gradient. We denote $P = \text{softmax}(Z)$  where $Z := XW$.
 \begin{align*}
 \nabla_W L = \nabla_Z L\  . \nabla_W Z = \frac{1}{N} X^{T} (\text{softmax}(XW) - Y)
 \end{align*}
-
 \section{SVD structural analysis}
-
+The Muon optimizer makes use of the Newton Schulz algorithm 
 \subsection{CIFAR-10 ResNet}
-The \href{https://github.com/KellerJordan/cifar10-airbench}{CIFAR-10 speedrun repository} is a competitive benchmarking project. The goal is to construct a 
+The CIFAR speedrun is a competitive benchmark which aims to achieve a specified test set accuracy in the shortest possible training time (standardized in NVIDIA A100-minutes). Researchers submit their optimizations, which can include network architecture changes, alterations to the training pipeline and test time tricks, and the submission is then benchmarked over a number of random seeds. 
+Remarkably, with enhancements using Muon (\todo{cite the right thing}), the record is a mere $2.59$ seconds to achieve 94\% training accuracy. 
+\\
+We make use of this repository to ablate on some hyperparameter choices for the Muon optimizer. 
+\subsubsection*{Comparing Newton Schulz approximation to full Gradient Orthogonalization}
 
 
-
-
-Closed form for two KL divergences is 
-\[
-D_{KL}(p \,\|\, q) = \frac{1}{2} \left[ \mathrm{tr}(\Sigma_q^{-1} \Sigma_p) + (\mu_q - \mu_p)^\top \Sigma_q^{-1} (\mu_q - \mu_p) - k + \ln\left(\frac{\det\Sigma_q}{\det\Sigma_p}\right) \right]
-\] 
+\section{Muon on nanoGPT and plainLM} 
 \bibliographystyle{plain}
 \bibliography{bibliography}
-
 \end{document} 

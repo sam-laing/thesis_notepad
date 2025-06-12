@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{NGdescent}
 Shun-ichi Amari.
@@ -9,10 +9,29 @@ Shun-ichi Amari.
 Jeremy Bernstein.
 \newblock Deriving muon, 2025.
 
+\bibitem{bernstein2024modulardualitydeeplearning}
+Jeremy Bernstein and Laker Newhouse.
+\newblock Modular duality in deep learning, 2024.
+
+\bibitem{Idelbayev18a}
+Yerlan Idelbayev.
+\newblock Proper {ResNet} implementation for {CIFAR10/CIFAR100} in {PyTorch}.
+\newblock \url{https://github.com/akamaster/pytorch_resnet_cifar10}.
+\newblock Accessed: 20xx-xx-xx.
+
+\bibitem{jordan2024muon}
+Keller Jordan, Yuchen Jin, Vlado Boza, Jiacheng You, Franz Cesista, Laker
+  Newhouse, and Jeremy Bernstein.
+\newblock Muon: An optimizer for hidden layers in neural networks, 2024.
+
 \bibitem{Karpathy2022}
 Andrej Karpathy.
 \newblock \text{NanoGPT}.
 \newblock \url{https://github.com/karpathy/nanoGPT}, 2022.
+
+\bibitem{kingma2017adammethodstochasticoptimization}
+Diederik~P. Kingma and Jimmy Ba.
+\newblock Adam: A method for stochastic optimization, 2017.
 
 \bibitem{moonshot}
 Jingyuan Liu, Jianlin Su, Xingcheng Yao, Zhejun Jiang, Guokun Lai, Yulun Du,
@@ -21,5 +40,23 @@ Jingyuan Liu, Jianlin Su, Xingcheng Yao, Zhejun Jiang, Guokun Lai, Yulun Du,
   Mengnan Dong, Zheng Zhang, Yongsheng Kang, Hao Zhang, Xinran Xu, Yutao Zhang,
   Yuxin Wu, Xinyu Zhou, and Zhilin Yang.
 \newblock Muon is scalable for llm training, 2025.
+
+\bibitem{loshchilov2019decoupledweightdecayregularization}
+Ilya Loshchilov and Frank Hutter.
+\newblock Decoupled weight decay regularization, 2019.
+
+\bibitem{pethick2025trainingdeeplearningmodels}
+Thomas Pethick, Wanyun Xie, Kimon Antonakopoulos, Zhenyu Zhu, Antonio
+  Silveti-Falls, and Volkan Cevher.
+\newblock Training deep learning models with norm-constrained lmos, 2025.
+
+\bibitem{swiGLU}
+Noam Shazeer.
+\newblock {GLU} variants improve transformer.
+\newblock {\em CoRR}, abs/2002.05202, 2020.
+
+\bibitem{yuan2020eadamoptimizerepsilonimpact}
+Wei Yuan and Kai-Xin Gao.
+\newblock Eadam optimizer: How $\epsilon$ impact adam, 2020.
 
 \end{thebibliography}
