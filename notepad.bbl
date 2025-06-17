@@ -13,6 +13,14 @@ Jeremy Bernstein.
 Jeremy Bernstein and Laker Newhouse.
 \newblock Modular duality in deep learning, 2024.
 
+\bibitem{bernstein2024oldoptimizernewnorm}
+Jeremy Bernstein and Laker Newhouse.
+\newblock Old optimizer, new norm: An anthology, 2024.
+
+\bibitem{gupta2018shampoopreconditionedstochastictensor}
+Vineet Gupta, Tomer Koren, and Yoram Singer.
+\newblock Shampoo: Preconditioned stochastic tensor optimization, 2018.
+
 \bibitem{Idelbayev18a}
 Yerlan Idelbayev.
 \newblock Proper {ResNet} implementation for {CIFAR10/CIFAR100} in {PyTorch}.

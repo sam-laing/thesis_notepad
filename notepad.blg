@@ -3,44 +3,44 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: notepad.aux
 The style file: plain.bst
 Database file #1: bibliography.bib
-You've used 12 entries,
+You've used 14 entries,
             2118 wiz_defined-function locations,
-            554 strings with 5855 characters,
-and the built_in function-call counts, 3851 in all, are:
-= -- 318
-> -- 301
+            560 strings with 6073 characters,
+and the built_in function-call counts, 4348 in all, are:
+= -- 360
+> -- 332
 < -- 0
-+ -- 120
-- -- 108
-* -- 262
-:= -- 678
-add.period$ -- 29
-call.type$ -- 12
-change.case$ -- 90
++ -- 132
+- -- 118
+* -- 287
+:= -- 760
+add.period$ -- 33
+call.type$ -- 14
+change.case$ -- 101
 chr.to.int$ -- 0
-cite$ -- 12
-duplicate$ -- 91
-empty$ -- 265
-format.name$ -- 108
-if$ -- 765
+cite$ -- 14
+duplicate$ -- 105
+empty$ -- 309
+format.name$ -- 118
+if$ -- 870
 int.to.chr$ -- 0
-int.to.str$ -- 12
+int.to.str$ -- 14
 missing$ -- 2
-newline$ -- 56
-num.names$ -- 24
-pop$ -- 136
+newline$ -- 64
+num.names$ -- 28
+pop$ -- 157
 preamble$ -- 1
-purify$ -- 78
+purify$ -- 87
 quote$ -- 0
-skip$ -- 94
+skip$ -- 111
 stack$ -- 0
-substring$ -- 81
-swap$ -- 12
+substring$ -- 91
+swap$ -- 14
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 48
+type$ -- 56
 warning$ -- 0
-while$ -- 25
-width$ -- 14
-write$ -- 109
+while$ -- 29
+width$ -- 16
+write$ -- 125

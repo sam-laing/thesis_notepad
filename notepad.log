@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2025.5.18)  12 JUN 2025 19:43
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2025.5.18)  17 JUN 2025 14:27
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -898,7 +898,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 596--600
 
  []
 
-</home/slaing/ML/thesis/thesis_notepad/images//bias_correction_factor1.pdf, id=260, 400.0458pt x 339.1227pt>
+</home/slaing/ML/thesis/thesis_notepad/images//bias_correction_factor1.pdf, id=265, 400.0458pt x 339.1227pt>
 File: /home/slaing/ML/thesis/thesis_notepad/images//bias_correction_factor1.pdf Graphic file (type pdf)
 <use /home/slaing/ML/thesis/thesis_notepad/images//bias_correction_factor1.pdf>
 Package pdftex.def Info: /home/slaing/ML/thesis/thesis_notepad/images//bias_correction_factor1.pdf  used on input line 608.
@@ -934,27 +934,17 @@ Overfull \hbox (3.49748pt too wide) in paragraph at lines 642--649
 [22]
 Chapter 6.
 
-Underfull \hbox (badness 10000) in paragraph at lines 654--660
+Underfull \hbox (badness 10000) in paragraph at lines 654--661
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 654--660
-
+Overfull \hbox (19.25235pt too wide) in paragraph at lines 663--669
+\T1/ppl/m/n/12 Indeed, the vast ma-jor-ity of commonly-used first-order op-ti-miz-ers (SGD, RM-SProp, Adadelta
  []
 
 
-Overfull \hbox (1.9844pt too wide) in paragraph at lines 662--671
-\T1/ppl/m/n/12 The vast ma-jor-ity of commonly-used first-order op-ti-miz-ers (e.g. SGD, RM-SProp, Adadelta
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 662--671
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 662--671
+Underfull \hbox (badness 10000) in paragraph at lines 663--669
 
  []
 
@@ -965,34 +955,56 @@ Underfull \hbox (badness 10000) in paragraph at lines 673--678
 
 [23
 
-] [24]
-LaTeX Font Info:    Trying to load font information for U+bbm on input line 713.
+]
+Underfull \hbox (badness 10000) in paragraph at lines 680--683
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 707--709
+
+ []
+
+[24]
+LaTeX Font Info:    Trying to load font information for U+bbm on input line 729.
  (/usr/share/texlive/texmf-dist/tex/latex/bbm-macros/ubbm.fd
 File: ubbm.fd 1999/03/15 V 1.2 Font definition for bbm font - TH
-) [25]
-Overfull \hbox (6.12325pt too wide) in paragraph at lines 766--770
+)
+Underfull \hbox (badness 10000) in paragraph at lines 735--739
+
+ []
+
+[25]
+Underfull \hbox (badness 10000) in paragraph at lines 753--759
+
+ []
+
+[26]
+Overfull \hbox (6.12325pt too wide) in paragraph at lines 806--810
 \T1/ppl/m/n/12 set ac-cu-racy in the short-est pos-si-ble train-ing time (stan-dard-ized in NVIDIA A100-minutes).
  []
 
-(./notepad.bbl [26] [27] [28
+(./notepad.bbl [27] [28
 
 ]) [29] (./notepad.aux)
 Package rerunfilecheck Info: File `notepad.out' has not changed.
-(rerunfilecheck)             Checksum: F69FD6622AA180D45A87A6C38238E590;5140.
+(rerunfilecheck)             Checksum: E83771AEB1EBA6FB9B9FF0748447B989;5361.
  ) 
 Here is how much of TeX's memory you used:
- 27393 strings out of 480171
- 513153 string characters out of 5894489
- 783907 words of memory out of 5000000
- 44723 multiletter control sequences out of 15000+600000
+ 27402 strings out of 480171
+ 513392 string characters out of 5894489
+ 784031 words of memory out of 5000000
+ 44726 multiletter control sequences out of 15000+600000
  527712 words of font info for 170 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
- 114i,14n,118p,771b,412s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 114i,17n,118p,771b,412s stack positions out of 5000i,500n,10000p,200000b,80000s
+pdfTeX warning (dest): name{Hfootnote.3} has been referenced but does not exist, replaced by a fixed one
+
  </home/slaing/.texlive2021/texmf-var/fonts/pk/ljfour/public/bbm/bbm12.600pk>{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/mathpazo/fplmbb.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/mathpazo/fplmr.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on notepad.pdf (29 pages, 203860 bytes).
+Output written on notepad.pdf (29 pages, 207585 bytes).
 PDF statistics:
- 453 PDF objects out of 1000 (max. 8388607)
- 364 compressed objects within 4 object streams
- 85 named destinations out of 1000 (max. 500000)
- 242 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 470 PDF objects out of 1000 (max. 8388607)
+ 378 compressed objects within 4 object streams
+ 91 named destinations out of 1000 (max. 500000)
+ 250 words of extra memory for PDF output out of 10000 (max. 10000000)
 

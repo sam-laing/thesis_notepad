@@ -20,10 +20,12 @@
 \contentsline {section}{\numberline {6.2}Understanding Muon}{24}{section.6.2}%
 \contentsline {subsection}{\numberline {6.2.1}Metrized Deep Learning}{24}{subsection.6.2.1}%
 \contentsline {subsection}{\numberline {6.2.2}Dualized Gradients and Metrized Deep Learning}{24}{subsection.6.2.2}%
-\contentsline {subsection}{\numberline {6.2.3}The Newton Schulz Algorithm}{24}{subsection.6.2.3}%
+\contentsline {subsubsection}{Proof of Orthogonal Update step}{24}{section*.11}%
+\contentsline {subsection}{\numberline {6.2.3}Muon's Relationship to Shampoo}{24}{subsection.6.2.3}%
+\contentsline {subsection}{\numberline {6.2.4}The Newton Schulz Algorithm}{24}{subsection.6.2.4}%
 \contentsline {section}{\numberline {6.3}Ablations on Simple Problems}{24}{section.6.3}%
-\contentsline {subsection}{\numberline {6.3.1}Linear Regression}{24}{subsection.6.3.1}%
+\contentsline {subsection}{\numberline {6.3.1}Linear Regression}{25}{subsection.6.3.1}%
 \contentsline {subsection}{\numberline {6.3.2}Logistic Regression}{26}{subsection.6.3.2}%
-\contentsline {section}{\numberline {6.4}SVD structural analysis}{26}{section.6.4}%
-\contentsline {subsection}{\numberline {6.4.1}CIFAR-10 ResNet}{26}{subsection.6.4.1}%
+\contentsline {section}{\numberline {6.4}SVD structural analysis}{27}{section.6.4}%
+\contentsline {subsection}{\numberline {6.4.1}CIFAR-10 ResNet}{27}{subsection.6.4.1}%
 \contentsline {section}{\numberline {6.5}Muon on nanoGPT and plainLM}{27}{section.6.5}%

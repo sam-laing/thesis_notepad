@@ -651,28 +651,33 @@ It appears that what is far more important than the inclusion of bias correction
 
 
 \chapter{Beyond Adam: Is Muon the future?}
+While first-order optimization methods such as AdamW are currently the de-facto choice for training deep neural networks, 
 In recent years, there have been a number of papers which attempt to improve upon Adam(W) by leveraging information about the structure of individual layers. \\
-Newton's method, which requires explicit computation of the Hessian matrix, is rarely sufficiently efficient, or even tractable, in deep learning. Similarly, Natural Gradient Descent \cite{NGdescent} makes use of the Fischer information matrix \\
-A general principle of stochastic optimizers in the age of deep learning is to approximate local information about the curvature of the loss landscape without needing to explicitely compute the full second derivative. Knowledge of local curvature is known to help prevent becoming stuck in bad local minima.   \\
+Newton's method, which requires explicit computation of the inverse-Hessian matrix, is rarely sufficiently efficient, or even tractable, in deep learning. Similarly, Natural Gradient Descent \cite{NGdescent} requires computation of the inverse-Fischer information matrix \\
 \\
-\\
-Let $f:\mathcal{X} \times \Theta \to \mathcal{Y}$ with $\Theta \subset \R^{p}$ denote an arbirary deep neural . The textbook definition of most traditional stochastic optimization algorithms involves initialising $\theta_0 \in \Theta$ and then updating with some rule 
+While there has been a myriad of literature
+Let $f:\mathcal{X} \times \Theta \to \mathcal{Y}$ with $\Theta \subset \R^{p}$ denote an arbirary deep neural network and let $L:  \mathcal{X} \times \Theta \times \mathcal{Y} \to \R_{\ge0}$ denote a (continuously differentiable) loss function. \\
+The textbook definition of most traditional stochastic optimization algorithms involves initialising some $\theta_0 \in \Theta$ and then updating with some rule 
 \[
-\theta_{t+1} = \theta_t - \eta_t s_t
+\theta_{t+1} = \theta_t - \eta_t s_t 
 \] 
-for a step size $s_t \in \R^{d}$ which typically depends on the current stochastic gradient.  \\
-The vast majority of commonly-used first-order optimizers (e.g. SGD, RMSProp, Adadelta AdamW, Lion) ignore the structure of each individual layer of weights of a deep neural network and treat the parameters simply as a long concatenated vector made up of the flattened parameters of each layer. \\
+for some $s_t \in \R^{d}$ which is typically a function of the previous stochastic gradients $(g_{j})_{j=1}^t $ where $g_j := \nabla _{\theta_j} L(x_j, \theta_j, y_j)$ and $(x_j, y_j)\subset \mathcal{X}\times\mathcal{Y}$ is the sampled mini-batch for each $j\in\{1,\ldots,t\} $.  \\
+Indeed, the vast majority of commonly-used first-order optimizers (SGD, RMSProp, Adadelta AdamW, Lion) ignore the structure of each individual layer of weights of a deep neural network and treat the parameters simply as a long concatenated vector made up of the flattened parameters of each layer.  \\
+%While this optimization approach has been generally effective and has been the primary workhorse behind training practically all deep learinng models in the past decades,  
 \\
-An idea which has regained popularity in recent years is to exploit the individual structure of each layer of the matrix, leveraging this information to compute update directions tailored to each layer. \\ 
+An idea which has regained popularity in recent years is to exploit the individual structure of each layer of the matrix, leveraging this information to compute update directions tailored to each layer. For illustration's purpose, consider an MLP defined by 
+\[
+f(
+\] 
+
+ `
 The library \href{https://github.com/modula-systems/modula}{Modula} is built precisely on this notion, explicitely constructing a mathematical object called a \textit{module} (not to be confused with the traditional interpretation in commutative algebra). These 
 \\
 A current SOTA language model is \cite{moonshot}, which uses a  mixture of experts (MoE) transformer model architecture. The model explicitely uses Muon to optimizer linear (non-embedding) layers. Namely
 \\
 \section{Related Work}
 \section{Understanding Muon}
-The idea of Muon stemmed from (\todo{cite the modular norm papers from bernstein})
-\\
-The following exposition builds on the work of \cite{bernstein2024modulardualitydeeplearning}, \cite{bernstein2025deriving}, \cite{jordan2024muon}, \cite{pethick2025trainingdeeplearningmodels} supplemented with some additional pedagogy and proofs.
+The following exposition builds on the work of \cite{bernstein2024modulardualitydeeplearning}, \cite{bernstein2024oldoptimizernewnorm}, \cite{bernstein2025deriving}, \cite{jordan2024muon}, \cite{pethick2025trainingdeeplearningmodels} supplemented with some additional pedagogy and proofs.
 \todo{give a nice Muon explanation}
 \\
 
@@ -683,7 +688,12 @@ The paper \cite{bernstein2024modulardualitydeeplearning} reviatalizes an old pri
 Consider a differentiable loss function $L:\Theta \to \R_{\ge_0}$ with respect to the weight space $\Theta \subseteq \R^{d}$. One can consider the first order Taylor approximation of $L$ about arbitrary
 \[
  L(
-\] 
+\]
+\subsubsection{Proof of Orthogonal Update step}
+\subsection{Muon's Relationship to Shampoo}
+The Shampoo optimizer (\cite{gupta2018shampoopreconditionedstochastictensor}) is intimately connected to the Muon update step. 
+\\ 
+Indeed 
 \subsection{The Newton Schulz Algorithm}
 Under the framework of steepest descent under the RMS $\to$ RMS norm, the crucial step size for linear layers is seen as 
 
@@ -694,7 +704,37 @@ To gain a better understanding of the dynamics of Muon, we study its behavior in
 The experiments were all run with the \href{https://github.com/sam-laing/optimizer_playground/tree/main}{following codebase}
 
 \subsection{Linear Regression}
-We consider the case of linear regression with a multi-dimensional output. Namely, consider a datasetThis is the simplest setting in which Muon can be applied as the weights for the one-dimensional output case would not admit a matrix structure. 
+To whet our apetite, we begin by studying the case of linear regression. \\
+Since Muon explicitely depends on the weight space that admits a matrix structure, we propose the following multi-output linear regression problem as the simplest for which Muon can be applied (methodology for synthetic data generation will then be discussed in detail \textcolor{red}{later} ):\\
+\[
+Y = XW + \varepsilon \ \ \ \ \text{  where:}\  \ 
+\begin{cases}
+X \in\R^{N\times d} \text{ is our feature matrix }\\
+W\in \R^{d\times D}\text{is our weight matrix \footnotemark{}\footnotetext{In academic linear regression, usually a bias term is consumed into the feature matrix $X <- [1 | X]$. We will later run an experiment varying this parameter but for now think of the problem as having no bias included. see \textcolor{red}{here}}}\\
+Y \in \R^{N\times D} \text{ is our target space}\\
+\varepsilon \in\R^{N\times D} \text{ noise where $\varepsilon _{i,j}\sim \mathcal{N}(0, \sigma_j^2)$ for $\sigma_1^2, \ldots, \sigma _D^2 \in \R_{>0}$}
+\
+\end{cases}
+\] 
+%Let $X\in \R^{N\times d}$ be our feature matrix, $W\in \R^{d\times D}$ our weight matrix and $Y\in\R^{N\times D}$ our target space. $Y$ is then modelled as a linear function of  $X$ with noise.  $\varepsilon \in \R^{N\times D}$ with $ \varepsilon _{i,j} \sim \mathcal{N}(0, \sigma_j^2)$ for $\sigma_1^2, \ldots, \sigma _D^2 \in \R_{>0}$
+\\
+The objective (or loss) function is then given by 
+\[
+	L(W; X,Y) :=  \\ = \|Y - XW\|_F^{2}  \quad  (*)
+\] 
+where $\|A\|_F := \sqrt{ \sum_{i,j \in [m]\times[n]}^{} {|a_{ij}|^2}}$ denotes the Frobenius norm of a matrix. \\
+The objective function is manifestly convex in $W$. Indeed, we have 
+\begin{align*}
+L(W) = \|Y - XW\|_F^2 = \|\text{vec(Y - XW)}\|_2^2 = \|\text{vec}(Y) - (\mathbbm{1}_D \otimes X) \text{vec} (W)\|_2^2  
+\end{align*}
+where $\otimes$ denotes the standard Kronecker Product.\\ 
+which is simply a quadratic function of the form $f(x) = \|y - Ax\|_2^2$ with positive-definite Hessian $2A^{T}A$  \\
+\begin{theorem}{tensor product stuff}
+we have: 
+\end{theorem} 
+While such a simple problem admits an analytic solution (indeed $W^* = (X^{T}X)^{-1}X^{T}Y$ provided $X^{T}X$ is invertible), we study the case where the number of datapoints is large   
+\\
+\\
 Here the dynamics of stochastic optimizers are generally well understood. We strive to understand how Muon behaves in this setting and how it differs from SGD and AdamW. We generate a synthetic dataset as follows:
 \begin{itemize}
 	\item Generate data $Z\in \R^{Nxd}$ with $z_{ij}\sim \mathcal{N}(0,1)$ (corresponding to $N$ datapoints $x_i \in\R^{d}$) and let $X = [1 | Z] \in\R^{d+1} $ (maybe generate better data than just normal) 
@@ -711,8 +751,8 @@ The objective function is manifestly convex in $W$. Indeed, we have
 \begin{align*}
 L(W) = \|Y - XW\|_F^2 = \|\text{vec(Y - XW)}\|_2^2 = \|\text{vec}(Y) - (\mathbbm{1}_D \otimes X) \text{vec} (W)\|_2^2  
 \end{align*}
-which is simply a quadratic function of the form $f(x) = \|y - Ax\|_2^2$ with positive-definite Hessian $2A^{T}A$. \\
-While such a simple problem admits an analytic solution (indeed $W^* = (X^{T}X)^{-1}X^{T}Y$ provided $X^{T}X$ is invertible), we study the case where the number of datapoints is large   
+which is simply a quadratic function of the form $f(x) = \|y - Ax\|_2^2$ with positive-definite Hessian $2A^{T}A$ (where $\otimes$ denotes the Kronecker Product).  \\
+While such a simple problem admits an analytic solution (indeed $W^* = (X^{T}X)^{-1}X^{T}Y$ provided $X^{T}X$ is invertible), we study the case where the number of datapoints is large   \\
 \\
 We experiment with both mini-batch and full gradient methods. \\
 The gradient of $(*)$ is given by 
