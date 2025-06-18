@@ -31,8 +31,9 @@
 \contentsline {section}{\numberline {4.3}Ablations on Simple Problems}{20}{section.4.3}%
 \contentsline {subsection}{\numberline {4.3.1}Linear Regression}{21}{subsection.4.3.1}%
 \contentsline {subsection}{\numberline {4.3.2}A Quadratic Problem}{22}{subsection.4.3.2}%
-\contentsline {subsection}{\numberline {4.3.3}Logistic Regression}{22}{subsection.4.3.3}%
+\contentsline {subsection}{\numberline {4.3.3}Logistic Regression}{23}{subsection.4.3.3}%
+\contentsline {subsection}{\numberline {4.3.4}Small MLPs}{23}{subsection.4.3.4}%
 \contentsline {section}{\numberline {4.4}SVD structural analysis}{23}{section.4.4}%
 \contentsline {subsection}{\numberline {4.4.1}CIFAR-10 ResNet}{23}{subsection.4.4.1}%
-\contentsline {section}{\numberline {4.5}Muon on nanoGPT and plainLM}{23}{section.4.5}%
+\contentsline {section}{\numberline {4.5}Muon on nanoGPT and plainLM}{24}{section.4.5}%
 \contentsline {chapter}{\numberline {5}Discussion and Future Work}{25}{chapter.5}%

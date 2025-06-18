@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2025.5.18)  18 JUN 2025 14:47
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2025.5.18)  18 JUN 2025 17:07
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -912,7 +912,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 626--630
 
  []
 
-</home/slaing/ML/thesis/thesis_notepad/images//bias_correction_factor1.pdf, id=287, 400.0458pt x 339.1227pt>
+</home/slaing/ML/thesis/thesis_notepad/images//bias_correction_factor1.pdf, id=292, 400.0458pt x 339.1227pt>
 File: /home/slaing/ML/thesis/thesis_notepad/images//bias_correction_factor1.pdf Graphic file (type pdf)
 <use /home/slaing/ML/thesis/thesis_notepad/images//bias_correction_factor1.pdf>
 Package pdftex.def Info: /home/slaing/ML/thesis/thesis_notepad/images//bias_correction_factor1.pdf  used on input line 638.
@@ -992,35 +992,35 @@ Underfull \hbox (badness 10000) in paragraph at lines 750--767
  []
 
 [21] [22]
-Overfull \hbox (6.12325pt too wide) in paragraph at lines 829--833
+Overfull \hbox (6.12325pt too wide) in paragraph at lines 838--842
 \T1/ppl/m/n/12 set ac-cu-racy in the short-est pos-si-ble train-ing time (stan-dard-ized in NVIDIA A100-minutes).
  []
 
-[23] [24
-
-]
+[23] [24]
 Chapter 5.
-(./notepad.bbl [25] [26
+(./notepad.bbl [25
+
+] [26
 
 ] [27]) [28] (./notepad.aux)
 Package rerunfilecheck Info: File `notepad.out' has not changed.
-(rerunfilecheck)             Checksum: 3A50CE90863986C8A72D7991F986A9AD;7509.
+(rerunfilecheck)             Checksum: 0E8DB1BFEE1A740D444159B3F57E57CC;7624.
  ) 
 Here is how much of TeX's memory you used:
- 27415 strings out of 480171
- 513741 string characters out of 5894489
+ 27417 strings out of 480171
+ 513775 string characters out of 5894489
  782197 words of memory out of 5000000
- 44737 multiletter control sequences out of 15000+600000
+ 44738 multiletter control sequences out of 15000+600000
  527712 words of font info for 170 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
  114i,17n,118p,768b,477s stack positions out of 5000i,500n,10000p,200000b,80000s
 pdfTeX warning (dest): name{Hfootnote.3} has been referenced but does not exist, replaced by a fixed one
 
  </home/slaing/.texlive2021/texmf-var/fonts/pk/ljfour/public/bbm/bbm12.600pk>{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/mathpazo/fplmbb.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/mathpazo/fplmr.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on notepad.pdf (28 pages, 206253 bytes).
+Output written on notepad.pdf (28 pages, 207702 bytes).
 PDF statistics:
- 501 PDF objects out of 1000 (max. 8388607)
- 409 compressed objects within 5 object streams
- 93 named destinations out of 1000 (max. 500000)
- 314 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 507 PDF objects out of 1000 (max. 8388607)
+ 415 compressed objects within 5 object streams
+ 94 named destinations out of 1000 (max. 500000)
+ 322 words of extra memory for PDF output out of 10000 (max. 10000000)
 

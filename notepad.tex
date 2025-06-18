@@ -516,10 +516,10 @@ In a number of pedagogical resources (cite Goodfellow, Geiger lecture series), b
 \end{align*}
 It is therefore argued that dividing by  $1-\beta_1^{t}$ removes the expected "bias" in the exponential moving average.\\ 
 Where an analogous argument is used to justify the bias correction factor for $v_t$. \\
-This assumption that $\E[g_t] \approx \E[g_i]$ for $i<t$ is patently false. We argue through a number of experiments with a custom implementation of AdamW that the bias correction step can be removed from AdamW with no adverse effects.
+This assumption that $\E[g_t] \approx \E[g_i]$ for $i<t$ is blatently false. We argue through a number of experiments with a custom implementation of AdamW that the bias correction step can be removed from AdamW with no adverse effects.
 \\
 
-
+\todo{some visualiation or way to make this look nice}
 \subsection{Experimental Outline}
 We conduct a number of experiment in both a vision and language setting. \\
 In the vision setting, we consider:
@@ -699,7 +699,7 @@ The following exposition builds on the work of \cite{bernstein2024modularduality
 \subsection{Metrized Deep Learning}
 
 \subsection{Dualized Gradients and Metrized Deep Learning}
-The paper \cite{bernstein2024modulardualitydeeplearning} reviatalizes an old principle in optimization theory. Namely, the insistance on viewing the gradient as a dual vector. \\
+The paper \cite{bernstein2024modulardualitydeeplearning} reviatalizes an old principle in optimization theory. Namely, the insistance on viewing the gradient as a vector living in the dual space to the corresponding weight space.  \\
 Consider a differentiable loss function $L:\Theta \to \R_{\ge_0}$ with respect to the weight space $\Theta \subseteq \R^{d}$. One can consider the first order Taylor approximation of $L$ about arbitrary
 \[
  L(
@@ -797,10 +797,18 @@ Where $x \in \R^{m\times n}$ and $A\in \R^{m\times m}$ is usually a symmetric po
 \\
 Again, since Muon insists upon a weight space with a matrix structure, we reforumulate this problem into it's simplest matrix analogue:
 \begin{equation}\label{eq: matquadratic}
-	\text{minimize}\left( q(W) := \text{trace}(W^{T} Q W)  \equiv \|Q^{\frac{1}{2}} W\|_F^2\right)
+	\text{minimize}\left( q(W) := \frac{1}{2} \text{trace}(W^{T} Q W)  \equiv \|Q^{\frac{1}{2}} W\|_F^2\right)
 \end{equation}
 where $W\in\R^{m\times n}$ and $Q\in\R^{m\times m}$\\
-We note that again vectorization reduces \eqref{eq: matquadratic} to 
+We note that again vectorization reduces \eqref{eq: matquadratic} to a problem of the form of \eqref{eq: simple quadratic}:
+\begin{align*}
+q(W) &= \frac{1}{2} \sum_{i=1}^{n} {(W^{T} Q W)_{ii}} \\
+     &= \frac{1}{2} \sum_{i=1}^{n} {w_i^{T} Q w_i}    \quad (\text{where } w_i := \text{col}_i(W))\\
+ &= \frac{1}{2} \text{vec}(W)^{T} (\mathbbm{1}_n \times Q) \text{vec}(W) 
+\end{align*}
+\todo{Discuss a bit with antonio about the whole connection of these two problems, is parameter structure even a proper thing? Also the homogenous vs heterogeneous Hessian situation. }
+\\
+Provided the matrix 
 \subsection{Logistic Regression}
 Similarly to the Linear regression case, we consider multi-class classification with a softmax function. Again, because we are interested in the Muon optimizer, this is the simplest case for which the weights admit a natural matrix structure. 
 \\
@@ -823,6 +831,7 @@ Let us compute the gradient. We denote $P = \text{softmax}(Z)$  where $Z := XW$.
 \begin{align*}
 \nabla_W L = \nabla_Z L\  . \nabla_W Z = \frac{1}{N} X^{T} (\text{softmax}(XW) - Y)
 \end{align*}
+\subsection{Small MLPs}
 \section{SVD structural analysis}
 The Muon optimizer makes use of the Newton Schulz algorithm 
 \subsection{CIFAR-10 ResNet}
