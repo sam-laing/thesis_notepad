@@ -1,31 +1,38 @@
 \babel@toc {english}{}\relax 
-\contentsline {chapter}{\numberline {1}Introduction}{7}{chapter.1}%
-\contentsline {chapter}{\numberline {2}Paper Review}{9}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Weight decay papers}{9}{section.2.1}%
-\contentsline {chapter}{\numberline {3}A Brief History of Optimization}{11}{chapter.3}%
-\contentsline {chapter}{\numberline {4}Understanding Adam}{13}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Why is AdamW the Top Dog?}{13}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Preliminaries and Related Work}{13}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}EAdam Paper probably}{14}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Relation to signSGD}{14}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}}{14}{subsection.4.2.3}%
-\contentsline {section}{\numberline {4.3}Some Experiments/Ablations}{14}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}How EMA smooths the update signal}{14}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}The $\varepsilon $ Hyperparameter}{14}{subsection.4.3.2}%
-\contentsline {subsection}{\numberline {4.3.3}Nesting the Moving averages}{14}{subsection.4.3.3}%
-\contentsline {chapter}{\numberline {5}Bias Correction in Adam: A Detailed Analysis}{17}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Is Bias Correction just Hidden Learning rate scheduling?}{20}{section.5.1}%
-\contentsline {chapter}{\numberline {6}Beyond Adam: Is Muon the future?}{23}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Related Work}{24}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Understanding Muon}{24}{section.6.2}%
-\contentsline {subsection}{\numberline {6.2.1}Metrized Deep Learning}{24}{subsection.6.2.1}%
-\contentsline {subsection}{\numberline {6.2.2}Dualized Gradients and Metrized Deep Learning}{24}{subsection.6.2.2}%
-\contentsline {subsubsection}{Proof of Orthogonal Update step}{24}{section*.11}%
-\contentsline {subsection}{\numberline {6.2.3}Muon's Relationship to Shampoo}{24}{subsection.6.2.3}%
-\contentsline {subsection}{\numberline {6.2.4}The Newton Schulz Algorithm}{24}{subsection.6.2.4}%
-\contentsline {section}{\numberline {6.3}Ablations on Simple Problems}{24}{section.6.3}%
-\contentsline {subsection}{\numberline {6.3.1}Linear Regression}{25}{subsection.6.3.1}%
-\contentsline {subsection}{\numberline {6.3.2}Logistic Regression}{26}{subsection.6.3.2}%
-\contentsline {section}{\numberline {6.4}SVD structural analysis}{27}{section.6.4}%
-\contentsline {subsection}{\numberline {6.4.1}CIFAR-10 ResNet}{27}{subsection.6.4.1}%
-\contentsline {section}{\numberline {6.5}Muon on nanoGPT and plainLM}{27}{section.6.5}%
+\contentsline {chapter}{\numberline {1}Introduction}{5}{chapter.1}%
+\contentsline {chapter}{\numberline {2}Understanding Adam}{7}{chapter.2}%
+\contentsline {section}{\numberline {2.1}A (very) Brief History of Optimization}{7}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Why is AdamW the Top Dog?}{7}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Preliminaries and Related Work}{7}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}EAdam Paper probably}{8}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Relation to signSGD}{8}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}Why transformers need Adam: hessian and class imbalance}{8}{subsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.3.4}The Secret Sauce paper}{8}{subsection.2.3.4}%
+\contentsline {section}{\numberline {2.4}Some Experiments/Ablations (Mostly an experiment graveyard sadly)}{8}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}}{8}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}Nesting the Moving averages}{8}{subsection.2.4.2}%
+\contentsline {subsection}{\numberline {2.4.3}Adam2SGD and $\varepsilon $ schedule}{9}{subsection.2.4.3}%
+\contentsline {subsection}{\numberline {2.4.4}How EMA smooths the update signal}{9}{subsection.2.4.4}%
+\contentsline {subsection}{\numberline {2.4.5}BackPACK}{9}{subsection.2.4.5}%
+\contentsline {subsection}{\numberline {2.4.6}The $\varepsilon $ Hyperparameter}{10}{subsection.2.4.6}%
+\contentsline {chapter}{\numberline {3}Bias Correction in Adam: A Detailed Analysis}{11}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Bias Correction: An Unnecessary Evil? }{11}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}A Discussion of the "Proof" for Bias Correction}{11}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Experimental Outline}{12}{subsection.3.1.2}%
+\contentsline {section}{\numberline {3.2}Is Bias Correction just Hidden Learning rate scheduling?}{15}{section.3.2}%
+\contentsline {chapter}{\numberline {4}Beyond Adam: Is Muon the future?}{19}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Related Work}{20}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Understanding Muon}{20}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Metrized Deep Learning}{20}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Dualized Gradients and Metrized Deep Learning}{20}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Proof of Orthogonal Update step}{20}{subsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.2.4}Muon's Relationship to Shampoo}{20}{subsection.4.2.4}%
+\contentsline {subsection}{\numberline {4.2.5}The Newton Schulz Algorithm}{20}{subsection.4.2.5}%
+\contentsline {section}{\numberline {4.3}Ablations on Simple Problems}{20}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Linear Regression}{21}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}A Quadratic Problem}{22}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Logistic Regression}{22}{subsection.4.3.3}%
+\contentsline {section}{\numberline {4.4}SVD structural analysis}{23}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}CIFAR-10 ResNet}{23}{subsection.4.4.1}%
+\contentsline {section}{\numberline {4.5}Muon on nanoGPT and plainLM}{23}{section.4.5}%
+\contentsline {chapter}{\numberline {5}Discussion and Future Work}{25}{chapter.5}%

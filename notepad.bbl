@@ -21,6 +21,10 @@ Jeremy Bernstein and Laker Newhouse.
 Vineet Gupta, Tomer Koren, and Yoram Singer.
 \newblock Shampoo: Preconditioned stochastic tensor optimization, 2018.
 
+\bibitem{huang2018denselyconnectedconvolutionalnetworks}
+Gao Huang, Zhuang Liu, Laurens van~der Maaten, and Kilian~Q. Weinberger.
+\newblock Densely connected convolutional networks, 2018.
+
 \bibitem{Idelbayev18a}
 Yerlan Idelbayev.
 \newblock Proper {ResNet} implementation for {CIFAR10/CIFAR100} in {PyTorch}.
