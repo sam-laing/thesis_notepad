@@ -804,7 +804,7 @@ We note that again vectorization reduces \eqref{eq: matquadratic} to a problem o
 \begin{align*}
 q(W) &= \frac{1}{2} \sum_{i=1}^{n} {(W^{T} Q W)_{ii}} \\
      &= \frac{1}{2} \sum_{i=1}^{n} {w_i^{T} Q w_i}    \quad (\text{where } w_i := \text{col}_i(W))\\
- &= \frac{1}{2} \text{vec}(W)^{T} (\mathbbm{1}_n \times Q) \text{vec}(W) 
+ &= \frac{1}{2} \text{vec}(W)^{T} (\mathbbm{1}_n \otimes Q) \text{vec}(W) 
 \end{align*}
 \todo{Discuss a bit with antonio about the whole connection of these two problems, is parameter structure even a proper thing? Also the homogenous vs heterogeneous Hessian situation. }
 \\
@@ -835,15 +835,21 @@ Let us compute the gradient. We denote $P = \text{softmax}(Z)$  where $Z := XW$.
 \section{SVD structural analysis}
 The Muon optimizer makes use of the Newton Schulz algorithm 
 \subsection{CIFAR-10 ResNet}
-The CIFAR speedrun is a competitive benchmark which aims to achieve a specified test set accuracy in the shortest possible training time (standardized in NVIDIA A100-minutes). Researchers submit their optimizations, which can include network architecture changes, alterations to the training pipeline and test time tricks, and the submission is then benchmarked over a number of random seeds. 
-Remarkably, with enhancements using Muon (\todo{cite the right thing}), the record is a mere $2.59$ seconds to achieve 94\% training accuracy. 
+The CIFAR speedrun is a competitive benchmark which aims to achieve a specified test set accuracy in the shortest possible training time (standardized in NVIDIA A100-minutes). Researchers submit their optimizations, which can include network architecture changes, alterations to the training pipeline and test time tricks, and the submission is then benchmarked by averaging over a number of random seeds. The goal is to achieve the shortest average training time while exceeding a pre defined test set accuracy. \\
+Remarkably, with enhancements using Muon (\todo{cite the right thing}), the current record is a mere $2.59$ seconds to achieve 94\% training accuracy. 
 \\
-We make use of this repository to ablate on some hyperparameter choices for the Muon optimizer. 
+We make use of this repository to ablate on some hyperparameter choices for the Muon optimizer while enjoying minimal experiment runtimes. 
+\\
 \subsubsection*{Comparing Newton Schulz approximation to full Gradient Orthogonalization}
 
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.9\linewidth]{/home/slaing/ML/thesis/thesis_notepad/images/muon_accuracy_figure.pdf}
+  \caption{Your caption here}
+  \label{fig:muon_accuracy}
+\end{figure}
 
 \section{Muon on nanoGPT and plainLM} 
-
 \chapter{Discussion and Future Work}
 \bibliographystyle{plain}
 \bibliography{bibliography}

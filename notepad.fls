@@ -1330,6 +1330,11 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/bbm/bbm12.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/bbm/bbm9.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/bbm/bbm7.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/bbm/bbm5.tfm
+INPUT /home/slaing/ML/thesis/thesis_notepad/images/muon_accuracy_figure.pdf
+INPUT /home/slaing/ML/thesis/thesis_notepad/images/muon_accuracy_figure.pdf
+INPUT /home/slaing/ML/thesis/thesis_notepad/images/muon_accuracy_figure.pdf
+INPUT /home/slaing/ML/thesis/thesis_notepad/images/muon_accuracy_figure.pdf
+INPUT /home/slaing/ML/thesis/thesis_notepad/images/muon_accuracy_figure.pdf
 INPUT ./notepad.bbl
 INPUT notepad.bbl
 INPUT ./notepad.bbl
