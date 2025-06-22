@@ -1,25 +1,24 @@
 \babel@toc {english}{}\relax 
 \contentsline {chapter}{\numberline {1}Introduction}{5}{chapter.1}%
 \contentsline {chapter}{\numberline {2}Understanding Adam}{7}{chapter.2}%
-\contentsline {section}{\numberline {2.1}A (very) Brief History of Optimization}{7}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Why is AdamW the Top Dog?}{7}{section.2.2}%
-\contentsline {section}{\numberline {2.3}Preliminaries and Related Work}{7}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}EAdam Paper probably}{8}{subsection.2.3.1}%
-\contentsline {subsection}{\numberline {2.3.2}Relation to signSGD}{8}{subsection.2.3.2}%
-\contentsline {subsection}{\numberline {2.3.3}Why transformers need Adam: hessian and class imbalance}{8}{subsection.2.3.3}%
-\contentsline {subsection}{\numberline {2.3.4}The Secret Sauce paper}{8}{subsection.2.3.4}%
-\contentsline {section}{\numberline {2.4}Some Experiments/Ablations (Mostly an experiment graveyard sadly)}{8}{section.2.4}%
-\contentsline {subsection}{\numberline {2.4.1}}{8}{subsection.2.4.1}%
-\contentsline {subsection}{\numberline {2.4.2}Nesting the Moving averages}{8}{subsection.2.4.2}%
-\contentsline {subsection}{\numberline {2.4.3}Adam2SGD and $\varepsilon $ schedule}{9}{subsection.2.4.3}%
-\contentsline {subsection}{\numberline {2.4.4}How EMA smooths the update signal}{9}{subsection.2.4.4}%
-\contentsline {subsection}{\numberline {2.4.5}BackPACK}{9}{subsection.2.4.5}%
-\contentsline {subsection}{\numberline {2.4.6}The $\varepsilon $ Hyperparameter}{10}{subsection.2.4.6}%
+\contentsline {section}{\numberline {2.1}Why is AdamW the Top Dog?}{7}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Preliminaries and Related Work}{8}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}EAdam Paper probably}{8}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Relation to signSGD}{8}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}Why transformers need Adam: hessian and class imbalance}{8}{subsection.2.2.3}%
+\contentsline {subsection}{\numberline {2.2.4}The Secret Sauce paper}{8}{subsection.2.2.4}%
+\contentsline {section}{\numberline {2.3}Some Experiments/Ablations (Mostly an experiment graveyard sadly)}{8}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}}{9}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Nesting the Moving averages}{9}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}Adam2SGD and $\varepsilon $ schedule}{9}{subsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.3.4}How EMA smooths the update signal}{9}{subsection.2.3.4}%
+\contentsline {subsection}{\numberline {2.3.5}BackPACK}{10}{subsection.2.3.5}%
+\contentsline {subsection}{\numberline {2.3.6}The $\varepsilon $ Hyperparameter}{10}{subsection.2.3.6}%
 \contentsline {chapter}{\numberline {3}Bias Correction in Adam: A Detailed Analysis}{11}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Bias Correction: An Unnecessary Evil? }{11}{section.3.1}%
 \contentsline {subsection}{\numberline {3.1.1}A Discussion of the "Proof" for Bias Correction}{11}{subsection.3.1.1}%
-\contentsline {subsection}{\numberline {3.1.2}Experimental Outline}{12}{subsection.3.1.2}%
-\contentsline {section}{\numberline {3.2}Is Bias Correction just Hidden Learning rate scheduling?}{15}{section.3.2}%
+\contentsline {section}{\numberline {3.2}Experimental Outline}{12}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Is Bias Correction just Hidden Learning rate scheduling?}{15}{section.3.3}%
 \contentsline {chapter}{\numberline {4}Beyond Adam: Is Muon the future?}{19}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Related Work}{20}{section.4.1}%
 \contentsline {section}{\numberline {4.2}Understanding Muon}{20}{section.4.2}%
@@ -36,4 +35,6 @@
 \contentsline {section}{\numberline {4.4}SVD structural analysis}{23}{section.4.4}%
 \contentsline {subsection}{\numberline {4.4.1}CIFAR-10 ResNet}{23}{subsection.4.4.1}%
 \contentsline {section}{\numberline {4.5}Muon on nanoGPT and plainLM}{24}{section.4.5}%
+\contentsline {section}{\numberline {4.6}Experimental }{24}{section.4.6}%
 \contentsline {chapter}{\numberline {5}Discussion and Future Work}{25}{chapter.5}%
+\contentsline {chapter}{\numberline {A}How Exponential Moving Averages Smooth the Update Signal}{29}{appendix.A}%

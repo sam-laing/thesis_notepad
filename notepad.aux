@@ -29,21 +29,23 @@
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \newlabel{chap: Understanding Adam}{{2}{7}{Understanding Adam}{chapter.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {2.1}A (very) Brief History of Optimization}{7}{section.2.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {2.2}Why is AdamW the Top Dog?}{7}{section.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {2.3}Preliminaries and Related Work}{7}{section.2.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.1}EAdam Paper probably}{8}{subsection.2.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.2}Relation to signSGD}{8}{subsection.2.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.3}Why transformers need Adam: hessian and class imbalance}{8}{subsection.2.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.4}The Secret Sauce paper}{8}{subsection.2.3.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {2.4}Some Experiments/Ablations (Mostly an experiment graveyard sadly)}{8}{section.2.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.1}}{8}{subsection.2.4.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.2}Nesting the Moving averages}{8}{subsection.2.4.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.3}Adam2SGD and $\varepsilon $ schedule}{9}{subsection.2.4.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.4}How EMA smooths the update signal}{9}{subsection.2.4.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.5}BackPACK}{9}{subsection.2.4.5}\protected@file@percent }
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Adam Optimizer \leavevmode {\color  {blue}(Bias Correction Experimental Focus)}\relax }}{7}{algorithm.1}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{alg:adam}{{1}{7}{Adam Optimizer \textcolor {blue}{(Bias Correction Experimental Focus)}\relax }{algorithm.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.1}Why is AdamW the Top Dog?}{7}{section.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.2}Preliminaries and Related Work}{8}{section.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}EAdam Paper probably}{8}{subsection.2.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}Relation to signSGD}{8}{subsection.2.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.3}Why transformers need Adam: hessian and class imbalance}{8}{subsection.2.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.4}The Secret Sauce paper}{8}{subsection.2.2.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.3}Some Experiments/Ablations (Mostly an experiment graveyard sadly)}{8}{section.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.1}}{9}{subsection.2.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.2}Nesting the Moving averages}{9}{subsection.2.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.3}Adam2SGD and $\varepsilon $ schedule}{9}{subsection.2.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.4}How EMA smooths the update signal}{9}{subsection.2.3.4}\protected@file@percent }
 \citation{yuan2020eadamoptimizerepsilonimpact}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.6}The $\varepsilon $ Hyperparameter}{10}{subsection.2.4.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.5}BackPACK}{10}{subsection.2.3.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.6}The $\varepsilon $ Hyperparameter}{10}{subsection.2.3.6}\protected@file@percent }
 \@writefile{toc}{\contentsline {chapter}{\numberline {3}Bias Correction in Adam: A Detailed Analysis}{11}{chapter.3}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
@@ -54,9 +56,9 @@
 \citation{huang2018denselyconnectedconvolutionalnetworks}
 \citation{Karpathy2022}
 \citation{swiGLU}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.2}Experimental Outline}{12}{subsection.3.1.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3.2}Is Bias Correction just Hidden Learning rate scheduling?}{15}{section.3.2}\protected@file@percent }
-\newlabel{eq: bias factor}{{3.1}{15}{Is Bias Correction just Hidden Learning rate scheduling?}{equation.3.2.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}Experimental Outline}{12}{section.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}Is Bias Correction just Hidden Learning rate scheduling?}{15}{section.3.3}\protected@file@percent }
+\newlabel{eq: bias factor}{{3.1}{15}{Is Bias Correction just Hidden Learning rate scheduling?}{equation.3.3.1}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {3.1}{\ignorespaces \textit  {ZI} denotes Zero init, \textit  {BC} denotes Bias Correction. Not doing ZI means we initialize $m$ and $v$ at $g_0$ and $g_0^2$ respectively. Default for AdamW is ZI and BC. Performing bias correction is not as important as initialization in Adam. Averaged results over 4 random seeds  HPs $\text  {lr:}0.008, \beta _1:0.95, \beta _2: 0.95, wd:0.1$\relax }}{17}{table.caption.4}\protected@file@percent }
 \citation{NGdescent}
 \citation{moonshot}
@@ -86,28 +88,31 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.3.4}Small MLPs}{23}{subsection.4.3.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {4.4}SVD structural analysis}{23}{section.4.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.4.1}CIFAR-10 ResNet}{23}{subsection.4.4.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces Your caption here\relax }}{24}{figure.caption.6}\protected@file@percent }
-\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{fig:muon_accuracy}{{4.1}{24}{Your caption here\relax }{figure.caption.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces Ablation varying number of Newton Schulz steps performed and comparing with an exact orthogonalization computed using the SVD of the matrix. Each data point on the x-axis corresponds to an averaged final test accuracy over 20 random seeds with error bars representing a 95\% confidence interval. \relax }}{24}{figure.caption.6}\protected@file@percent }
+\newlabel{fig:muon_cifar_NS}{{4.1}{24}{Ablation varying number of Newton Schulz steps performed and comparing with an exact orthogonalization computed using the SVD of the matrix. Each data point on the x-axis corresponds to an averaged final test accuracy over 20 random seeds with error bars representing a 95\% confidence interval. \relax }{figure.caption.6}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {4.5}Muon on nanoGPT and plainLM}{24}{section.4.5}\protected@file@percent }
-\bibstyle{plain}
+\@writefile{toc}{\contentsline {section}{\numberline {4.6}Experimental }{24}{section.4.6}\protected@file@percent }
+\bibstyle{alpha}
 \bibdata{bibliography}
 \@writefile{toc}{\contentsline {chapter}{\numberline {5}Discussion and Future Work}{25}{chapter.5}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\bibcite{NGdescent}{1}
-\bibcite{bernstein2025deriving}{2}
-\bibcite{bernstein2024modulardualitydeeplearning}{3}
-\bibcite{bernstein2024oldoptimizernewnorm}{4}
-\bibcite{gupta2018shampoopreconditionedstochastictensor}{5}
-\bibcite{huang2018denselyconnectedconvolutionalnetworks}{6}
-\bibcite{Idelbayev18a}{7}
-\bibcite{jordan2024muon}{8}
-\bibcite{Karpathy2022}{9}
-\bibcite{kingma2017adammethodstochasticoptimization}{10}
-\bibcite{moonshot}{11}
-\bibcite{loshchilov2019decoupledweightdecayregularization}{12}
-\bibcite{pethick2025trainingdeeplearningmodels}{13}
-\bibcite{swiGLU}{14}
-\bibcite{yuan2020eadamoptimizerepsilonimpact}{15}
-\gdef \@abspage@last{28}
+\bibcite{NGdescent}{Ama98}
+\bibcite{bernstein2025deriving}{Ber25}
+\bibcite{bernstein2024modulardualitydeeplearning}{BN24a}
+\bibcite{bernstein2024oldoptimizernewnorm}{BN24b}
+\bibcite{gupta2018shampoopreconditionedstochastictensor}{GKS18}
+\bibcite{huang2018denselyconnectedconvolutionalnetworks}{HLvdMW18}
+\bibcite{Idelbayev18a}{Ide}
+\bibcite{jordan2024muon}{JJB{$^{+}$}24}
+\bibcite{Karpathy2022}{Kar22}
+\bibcite{kingma2017adammethodstochasticoptimization}{KB17}
+\bibcite{loshchilov2019decoupledweightdecayregularization}{LH19}
+\bibcite{moonshot}{LSY{$^{+}$}25}
+\bibcite{pethick2025trainingdeeplearningmodels}{PXA{$^{+}$}25}
+\bibcite{swiGLU}{Sha20}
+\bibcite{yuan2020eadamoptimizerepsilonimpact}{YG20}
+\@writefile{toc}{\contentsline {chapter}{\numberline {A}How Exponential Moving Averages Smooth the Update Signal}{29}{appendix.A}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\gdef \@abspage@last{29}

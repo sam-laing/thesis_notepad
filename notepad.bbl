@@ -1,51 +1,56 @@
-\begin{thebibliography}{10}
+\newcommand{\etalchar}[1]{$^{#1}$}
+\begin{thebibliography}{HLvdMW18}
 
-\bibitem{NGdescent}
+\bibitem[Ama98]{NGdescent}
 Shun-ichi Amari.
 \newblock Natural gradient works efficiently in learning.
 \newblock {\em Neural Computation}, 10(2):251--276, 1998.
 
-\bibitem{bernstein2025deriving}
+\bibitem[Ber25]{bernstein2025deriving}
 Jeremy Bernstein.
 \newblock Deriving muon, 2025.
 
-\bibitem{bernstein2024modulardualitydeeplearning}
+\bibitem[BN24a]{bernstein2024modulardualitydeeplearning}
 Jeremy Bernstein and Laker Newhouse.
 \newblock Modular duality in deep learning, 2024.
 
-\bibitem{bernstein2024oldoptimizernewnorm}
+\bibitem[BN24b]{bernstein2024oldoptimizernewnorm}
 Jeremy Bernstein and Laker Newhouse.
 \newblock Old optimizer, new norm: An anthology, 2024.
 
-\bibitem{gupta2018shampoopreconditionedstochastictensor}
+\bibitem[GKS18]{gupta2018shampoopreconditionedstochastictensor}
 Vineet Gupta, Tomer Koren, and Yoram Singer.
 \newblock Shampoo: Preconditioned stochastic tensor optimization, 2018.
 
-\bibitem{huang2018denselyconnectedconvolutionalnetworks}
+\bibitem[HLvdMW18]{huang2018denselyconnectedconvolutionalnetworks}
 Gao Huang, Zhuang Liu, Laurens van~der Maaten, and Kilian~Q. Weinberger.
 \newblock Densely connected convolutional networks, 2018.
 
-\bibitem{Idelbayev18a}
+\bibitem[Ide]{Idelbayev18a}
 Yerlan Idelbayev.
 \newblock Proper {ResNet} implementation for {CIFAR10/CIFAR100} in {PyTorch}.
 \newblock \url{https://github.com/akamaster/pytorch_resnet_cifar10}.
 \newblock Accessed: 20xx-xx-xx.
 
-\bibitem{jordan2024muon}
+\bibitem[JJB{\etalchar{+}}24]{jordan2024muon}
 Keller Jordan, Yuchen Jin, Vlado Boza, Jiacheng You, Franz Cesista, Laker
   Newhouse, and Jeremy Bernstein.
 \newblock Muon: An optimizer for hidden layers in neural networks, 2024.
 
-\bibitem{Karpathy2022}
+\bibitem[Kar22]{Karpathy2022}
 Andrej Karpathy.
 \newblock \text{NanoGPT}.
 \newblock \url{https://github.com/karpathy/nanoGPT}, 2022.
 
-\bibitem{kingma2017adammethodstochasticoptimization}
+\bibitem[KB17]{kingma2017adammethodstochasticoptimization}
 Diederik~P. Kingma and Jimmy Ba.
 \newblock Adam: A method for stochastic optimization, 2017.
 
-\bibitem{moonshot}
+\bibitem[LH19]{loshchilov2019decoupledweightdecayregularization}
+Ilya Loshchilov and Frank Hutter.
+\newblock Decoupled weight decay regularization, 2019.
+
+\bibitem[LSY{\etalchar{+}}25]{moonshot}
 Jingyuan Liu, Jianlin Su, Xingcheng Yao, Zhejun Jiang, Guokun Lai, Yulun Du,
   Yidao Qin, Weixin Xu, Enzhe Lu, Junjie Yan, Yanru Chen, Huabin Zheng, Yibo
   Liu, Shaowei Liu, Bohong Yin, Weiran He, Han Zhu, Yuzhi Wang, Jianzhou Wang,
@@ -53,21 +58,17 @@ Jingyuan Liu, Jianlin Su, Xingcheng Yao, Zhejun Jiang, Guokun Lai, Yulun Du,
   Yuxin Wu, Xinyu Zhou, and Zhilin Yang.
 \newblock Muon is scalable for llm training, 2025.
 
-\bibitem{loshchilov2019decoupledweightdecayregularization}
-Ilya Loshchilov and Frank Hutter.
-\newblock Decoupled weight decay regularization, 2019.
-
-\bibitem{pethick2025trainingdeeplearningmodels}
+\bibitem[PXA{\etalchar{+}}25]{pethick2025trainingdeeplearningmodels}
 Thomas Pethick, Wanyun Xie, Kimon Antonakopoulos, Zhenyu Zhu, Antonio
   Silveti-Falls, and Volkan Cevher.
 \newblock Training deep learning models with norm-constrained lmos, 2025.
 
-\bibitem{swiGLU}
+\bibitem[Sha20]{swiGLU}
 Noam Shazeer.
 \newblock {GLU} variants improve transformer.
 \newblock {\em CoRR}, abs/2002.05202, 2020.
 
-\bibitem{yuan2020eadamoptimizerepsilonimpact}
+\bibitem[YG20]{yuan2020eadamoptimizerepsilonimpact}
 Wei Yuan and Kai-Xin Gao.
 \newblock Eadam optimizer: How $\epsilon$ impact adam, 2020.
 

@@ -1,5 +1,7 @@
 \documentclass[12pt]{book}
 
+\usepackage{algorithm}
+\usepackage{algpseudocode} % or \usepackage{algorithmic}
 \usepackage{cite} 
 \usepackage{mathpazo}
 \usepackage{booktabs}
@@ -420,13 +422,37 @@ however the wd update insists
 
 \chapter{Understanding Adam}
 \label{chap: Understanding Adam}
-We discuss some of the underlying theory, review some important literature and run some experiments with the aim of understanding the dynamics of AdamW and the role which each hyperparameter plays in Adam's efficacy.\\
+We discuss some of the underlying theory, review some important literature and run some experiments with the aim of understanding the dynamics of AdamW and the role which certain design choices play in Adam's efficacy.
+
+
+\begin{algorithm}
+\caption{Adam Optimizer \textcolor{blue}{(Bias Correction Experimental Focus)}}
+\label{alg:adam}
+\begin{algorithmic}[1]
+\Require $(\eta_t)_{t\ge_1} \subset \R_{\ge0}, \beta_1, \beta_2\in [0, 1),  \epsilon \in \R_{>0}$ \Comment{Standard hyperparameters}
+\Require $\theta_0$ \Comment{Initialised model weights}
+\Require \textcolor{red}{\texttt{do\_bias\_correction}}: bool \Comment{\textcolor{red}{Experimental flag}}
+
+\State Initialize $m_0, v_0, t \gets 0$
+\While{$\theta_t$ not converged}
+    \State $t \gets t + 1$
+    \State $g_t \gets \nabla_\theta f_t(\theta_{t-1})$
+    \State $m_t \gets \beta_1 m_{t-1} + (1-\beta_1)g_t$
+    \State $v_t \gets \beta_2 v_{t-1} + (1-\beta_2)g_t^2$
+    
+    \If{\textcolor{red}{\texttt{do\_bias\_correction}}}
+    \State $\hat{m}_t \gets \frac{m_t}{1-\beta_1^t}$ , $v_t \gets \frac{v_t}{1-\beta_2^t}$ \Comment{\textcolor{blue}{bias correction not by default}}
+    \EndIf
+    
+    \State $\theta_t \gets \theta_{t-1} - \eta_t \cfrac{m_t}{\sqrt{v_t} + \epsilon}$
+\EndWhile
+\end{algorithmic}
+\end{algorithm}
 Experiments 
-\section{A (very) Brief History of Optimization}
 \section{Why is AdamW the Top Dog?}
-The Adam optimizer \cite{kingma2017adammethodstochasticoptimization}  was introduced in 2017. With the addition of decoupled weight decay \cite{loshchilov2019decoupledweightdecayregularization}, it has been the de facto stochastic optimizer choice for nearly all SOTA deep learning training, particularly in language model pretraining. Extensive research into understanding Adam's dynamics has been conducted  \\
+The Adam optimizer \cite{kingma2017adammethodstochasticoptimization} was first published just over a decade ago. With the integral addition of decoupled weight decay \cite{loshchilov2019decoupledweightdecayregularization}, it has been the de facto stochastic optimizer choice for nearly all SOTA deep learning training, particularly in language model pretraining. Extensive research into understanding Adam's dynamics has been conducted however several key aspects remain not completely understood. \\
 \\
-The optimizer itself is merely a synthesis of two already well-established optimization ideas - momentum and RMSProp. Adam enjoys the upsides of both methods and has proved to be a powerful and robust choice   \\
+The optimizer itself is simply a synthesis of two already well-established optimization ideas - momentum and RMSProp. Adam enjoys the upsides of both methods and has proved to be a powerful and robust c\\
 Despite extensive research into optimizers for deep learning in the past decade, AdamW remains the default choice for the vast majority of both industry and academic applications. \\
 While a substantial number of publications claim great and consistent  
 \section{Preliminaries and Related Work}
@@ -520,7 +546,7 @@ This assumption that $\E[g_t] \approx \E[g_i]$ for $i<t$ is blatently false. We 
 \\
 
 \todo{some visualiation or way to make this look nice}
-\subsection{Experimental Outline}
+\section{Experimental Outline}
 We conduct a number of experiment in both a vision and language setting. \\
 In the vision setting, we consider:
 \begin{itemize}
@@ -623,19 +649,18 @@ why not just divide by $1-\beta_2$? rather than $1-\beta_2^{t}$? makes no differ
 
 
 \section{Is Bias Correction just Hidden Learning rate scheduling?}
-In our experiments comparing adam with and without bias correction, we found that certain choices of the pair $\beta_1, \beta_2$ caused a much greater discrepency in performance, but only when no learning rate schedule is used. This lead to the insight we present below. \\
+In our experiments comparing adam with and without bias correction, we found that certain choices of the pair $\beta_1, \beta_2$ caused a much greater discrepency in performance, but only when no learning rate schedule was used. This lead to the following insight. \\
 \\
-Consider the following factorization (we will ignore the $\varepsilon $ in the denominator for simplicity
-\footnotemark{}\footnotetext{We note that with $\varepsilon $ included, \ref{eq: bias factor} evaluates to $\frac{\sqrt{1-\beta_2^{t}} }{1-\beta_1^{t}} \ \frac{m_t}{\sqrt{v_t} }$}
+Consider the following factorization (we will ignore the $\varepsilon $ in the denominator for simplicity)
+\footnotemark{}\footnotetext{We note that if the $\color{red}{\varepsilon} $ term is inclubed, \ref{eq: bias factor} evaluates to $\frac{\sqrt{1-\beta_2^{t}} }{1-\beta_1^{t}} \ \frac{m_t}{\sqrt{v_t} + \color{red}{\varepsilon \sqrt{1-\beta_2^{t}} }}$. Since $\sqrt{1-\beta_2^{t}} \in [0,1] \forall t\in\N \ \forall \beta_2\in [0,1) $, bias correction should have minimal effect } 
 
 \begin{equation}
-	\frac{\hat{m}_t}{\hat{v}_t} = \cfrac{\frac{1}{1-\beta_1^{t}} m_t}{\sqrt{ \frac{1}{1-\beta_2^{t}}v_t}} = \cfrac{\sqrt{1-\beta_2^{t}} }{1-\beta_1^{t}} \ \cfrac{m_t}{\sqrt{v_t} }
+	\frac{\hat{m}_t}{\hat{v}_t} = \cfrac{\frac{1}{1-\beta_1^{t}} m_t}{\sqrt{ \frac{1}{1-\beta_2^{t}}v_t}} = \cfrac{\sqrt{1-\beta_2^{t}} }{1-\beta_1^{t}} \ \cfrac{m_t}{\sqrt{v_t} } = \rho(t; \beta_1, \beta_2) \frac{m_t}{\sqrt{v_t} }
 	\label{eq: bias factor}
 \end{equation}
-\href
-The behaviour of this factor $\rho(t;\beta_1,\beta_2) := \frac{\sqrt{1-\beta_2^{t}} }{1-\beta_1^{t}}$ depends greatly on the choice of $\beta_1, \beta_2\in [0, 1)$ \\
+The behaviour of $\rho(t;\beta_1,\beta_2) := \frac{\sqrt{1-\beta_2^{t}} }{1-\beta_1^{t}}$ which we refer to as the \textit{bias-correction factor} depends highly dependent on the choice of $\beta_1, \beta_2\in [0, 1)$ \\
 Consider the following plot: \\
-\includegraphics{bias_correction_factor1.pdf}
+\includegraphics{bias_correction_factor.pdf}
 \\
 For the pair $(\beta_1, \beta_2) = (0.9, 0.999)$, the factor resembles a very steady warmup whereas for the pair $(\beta_1, \beta_2) = (0.95, 0.95)$, the factor it merely a large spike which quickly converges to 1\\
 \\
@@ -719,7 +744,7 @@ To gain a better understanding of the dynamics of Muon, we study its behavior in
 The experiments were all run with the \href{https://github.com/sam-laing/optimizer_playground/tree/main}{following codebase}
 
 \subsection{Linear Regression}
-To whet our apetite, we begin by studying the case of linear regression. \\
+To whet our apetite, we begin by studying the case of linear regression. \\ 
 Since Muon explicitely depends on the weight space that admits a matrix structure, we propose the following multi-output linear regression problem as the simplest for which Muon can be applied (methodology for synthetic data generation will then be discussed in detail \textcolor{red}{later} ):\\
 \[
 Y = XW + \varepsilon \ \ \ \ \text{  where:}\  \ 
@@ -731,6 +756,7 @@ Y \in \R^{N\times D} \text{ is our target space}\\
 \
 \end{cases}
 \] 
+Indeed, excluding noise, this is an analogue of a hidden linear layer of a neural network
 %Let $X\in \R^{N\times d}$ be our feature matrix, $W\in \R^{d\times D}$ our weight matrix and $Y\in\R^{N\times D}$ our target space. $Y$ is then modelled as a linear function of  $X$ with noise.  $\varepsilon \in \R^{N\times D}$ with $ \varepsilon _{i,j} \sim \mathcal{N}(0, \sigma_j^2)$ for $\sigma_1^2, \ldots, \sigma _D^2 \in \R_{>0}$
 \\
 The objective (or loss) function is then given by 
@@ -744,12 +770,12 @@ L(W) = \|Y - XW\|_F^2 = \|\text{vec(Y - XW)}\|_2^2 = \|\text{vec}(Y) - (\mathbbm
 \end{align*}
 jwhere $\otimes$ denotes the standard Kronecker Product and $\text{vec}()$ denotes the vectorization of a rank $k$ tensor into a rank 1 tensor.)\\ 
 Clearly $(*)$ is simply a quadratic function of the form $f(z) = \|b - Az\|_2^2$ with positive-definite Hessian $A^{T}A$  \\ \\
-Using elementary properties of the tensor product (namely that $(A \otimes B)^T = A^T \otimes  B^T$ and $(A \otimes B)(P \otimes Q) = AP \otimes BQ $ whenever such a product makes sense), one can easily see that the identity:
+Using elementary properties of the tensor product (namely that $(A \otimes B)^T = A^T \otimes  B^T$ and $(A \otimes B)(P \otimes Q) := AP \otimes BQ $ whenever such a product makes sense), one can easily see that the identity:
 \[
 	(\mathbbm{1} _{D} \otimes X)^T(\mathbbm{1} _D \otimes X) = \mathbbm{1} _D \otimes (X^TX)
 \]
 The corresponding Hessian is therefore uniquely determined by the structure of the feature matrix $X$. 
-While such a simple problem admits an analytic solution (indeed $W^* = (X^{T}X)^{-1}X^{T}Y$ provided $X^{T}X$ is invertible), we study the case where the number of datapoints is large   
+While such a simple problem admits an analytic solution (indeed $W^* = (X^{T}X)^{-1}X^{T}Y$ provided $X^{T}X$ is invertible), the study of gradient-based optimizers on this problem can lead to valuable insights.    
 \\
 \\
 \\
@@ -773,6 +799,8 @@ The stochastic gradient for minibatch $(X_t, Y_t)\subset \R^{N\times d} \times \
 \[
 	G_t = \nabla_{W_t} L(W_t) = 2X_t^{T} (X_tW_t - Y_t)
 \]
+
+\begin{comment}
 We consider the singular value decomposition (SVD) $X = U \Sigma V^{T}$ of the feature matrix. 
 \\
 Then the gradient $G$ (up to a constant) is given by:
@@ -787,6 +815,7 @@ Indeed
 Since the Muon update dictates considering NewtonSchulz$_n(G_t)$ which is just an approximation of the orthogonalization of $G_t$, we will study the singular value decomposition of $G$ at each time step and study how a variety of factors 
 \\
 It is well established that the condition number of the feature matrix is a good indicator of the problem's numerical stability and learning difficulty. Therefore we are interested in the interplay between
+\end{comment}
 \subsection{A Quadratic Problem}
 Another commonly studied and generally well understood problem in optimization is the quadratic problem. \\
 In the simplest possible case, this problem is formulated as 
@@ -810,7 +839,7 @@ q(W) &= \frac{1}{2} \sum_{i=1}^{n} {(W^{T} Q W)_{ii}} \\
 \\
 Provided the matrix 
 \subsection{Logistic Regression}
-Similarly to the Linear regression case, we consider multi-class classification with a softmax function. Again, because we are interested in the Muon optimizer, this is the simplest case for which the weights admit a natural matrix structure. 
+Similarly to the linear regression case, we consider multi-class classification with a softmax function. Again, because we are interested in the Muon optimizer, this is the simplest case for which the weights admit a natural matrix structure. 
 \\
 One can view Logistic regression as a neural network of just one layer so it is certainly worthy of scrutiny.  
 \begin{itemize}
@@ -845,12 +874,16 @@ We make use of this repository to ablate on some hyperparameter choices for the 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.9\linewidth]{/home/slaing/ML/thesis/thesis_notepad/images/muon_accuracy_figure.pdf}
-  \caption{Your caption here}
-  \label{fig:muon_accuracy}
+  \caption{Ablation varying number of Newton Schulz steps performed and comparing with an exact orthogonalization computed using the SVD of the matrix. Each data point on the x-axis corresponds to an averaged final test accuracy over 20 random seeds with error bars representing a 95\% confidence interval.   }
+  \label{fig:muon_cifar_NS}
 \end{figure}
-
 \section{Muon on nanoGPT and plainLM} 
+\section{Experimental }
 \chapter{Discussion and Future Work}
-\bibliographystyle{plain}
+\bibliographystyle{alpha}
 \bibliography{bibliography}
+\appendix
+
+\chapter{How Exponential Moving Averages Smooth the Update Signal}
+It is generally well accepted that  
 \end{document} 

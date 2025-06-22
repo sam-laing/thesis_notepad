@@ -1,46 +1,46 @@
 This is BibTeX, Version 0.99d (TeX Live 2022/dev/Debian)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: notepad.aux
-The style file: plain.bst
+The style file: alpha.bst
 Database file #1: bibliography.bib
 You've used 15 entries,
-            2118 wiz_defined-function locations,
-            563 strings with 6235 characters,
-and the built_in function-call counts, 4643 in all, are:
-= -- 384
-> -- 355
-< -- 0
-+ -- 141
-- -- 126
-* -- 306
-:= -- 810
+            2543 wiz_defined-function locations,
+            624 strings with 6681 characters,
+and the built_in function-call counts, 5807 in all, are:
+= -- 507
+> -- 426
+< -- 5
++ -- 153
+- -- 152
+* -- 410
+:= -- 997
 add.period$ -- 35
 call.type$ -- 15
-change.case$ -- 108
-chr.to.int$ -- 0
+change.case$ -- 123
+chr.to.int$ -- 14
 cite$ -- 15
-duplicate$ -- 112
-empty$ -- 331
-format.name$ -- 126
-if$ -- 930
-int.to.chr$ -- 0
-int.to.str$ -- 15
+duplicate$ -- 162
+empty$ -- 376
+format.name$ -- 169
+if$ -- 1139
+int.to.chr$ -- 2
+int.to.str$ -- 0
 missing$ -- 2
-newline$ -- 68
-num.names$ -- 30
-pop$ -- 169
+newline$ -- 69
+num.names$ -- 45
+pop$ -- 176
 preamble$ -- 1
-purify$ -- 93
+purify$ -- 138
 quote$ -- 0
-skip$ -- 119
+skip$ -- 181
 stack$ -- 0
-substring$ -- 96
+substring$ -- 126
 swap$ -- 15
-text.length$ -- 0
-text.prefix$ -- 0
+text.length$ -- 5
+text.prefix$ -- 5
 top$ -- 0
-type$ -- 60
+type$ -- 120
 warning$ -- 0
-while$ -- 31
-width$ -- 17
-write$ -- 133
+while$ -- 41
+width$ -- 19
+write$ -- 164
