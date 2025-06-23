@@ -18,6 +18,12 @@ Jeremy Bernstein and Laker Newhouse.
 Jeremy Bernstein and Laker Newhouse.
 \newblock Old optimizer, new norm: An anthology, 2024.
 
+\bibitem[GBC16]{Goodfellow-et-al-2016}
+Ian Goodfellow, Yoshua Bengio, and Aaron Courville.
+\newblock {\em Deep Learning}.
+\newblock MIT Press, 2016.
+\newblock \url{http://www.deeplearningbook.org}.
+
 \bibitem[GKS18]{gupta2018shampoopreconditionedstochastictensor}
 Vineet Gupta, Tomer Koren, and Yoram Singer.
 \newblock Shampoo: Preconditioned stochastic tensor optimization, 2018.

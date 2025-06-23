@@ -1,5 +1,12 @@
 \documentclass[12pt]{book}
 
+
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{ragged2e}
+\usepackage{enumitem}
+\usepackage{siunitx}
+
 \usepackage{algorithm}
 \usepackage{algpseudocode} % or \usepackage{algorithmic}
 \usepackage{cite} 
@@ -83,6 +90,15 @@ colorlinks=true,
 
 \pdfsuppresswarningpagegroup=1
 
+% Compact itemize
+\newlist{tabitemize}{itemize}{1}
+\setlist[tabitemize]{
+  nosep,
+  leftmargin=*,
+  label=\textbullet,
+  before=\begin{minipage}[t]{\hsize},
+  after=\end{minipage}
+}
 \begin{document}
 \title{Thesis Notepad of Ideas and Progress etc}
 \maketitle
@@ -413,6 +429,7 @@ however the wd update insists
 %%%%% Start of Structure properly 
 
 \end{comment}
+\chapter{Abstract}
 
 
 \chapter{Introduction}
@@ -424,33 +441,8 @@ however the wd update insists
 \label{chap: Understanding Adam}
 We discuss some of the underlying theory, review some important literature and run some experiments with the aim of understanding the dynamics of AdamW and the role which certain design choices play in Adam's efficacy.
 
-
-\begin{algorithm}
-\caption{Adam Optimizer \textcolor{blue}{(Bias Correction Experimental Focus)}}
-\label{alg:adam}
-\begin{algorithmic}[1]
-\Require $(\eta_t)_{t\ge_1} \subset \R_{\ge0}, \beta_1, \beta_2\in [0, 1),  \epsilon \in \R_{>0}$ \Comment{Standard hyperparameters}
-\Require $\theta_0$ \Comment{Initialised model weights}
-\Require \textcolor{red}{\texttt{do\_bias\_correction}}: bool \Comment{\textcolor{red}{Experimental flag}}
-
-\State Initialize $m_0, v_0, t \gets 0$
-\While{$\theta_t$ not converged}
-    \State $t \gets t + 1$
-    \State $g_t \gets \nabla_\theta f_t(\theta_{t-1})$
-    \State $m_t \gets \beta_1 m_{t-1} + (1-\beta_1)g_t$
-    \State $v_t \gets \beta_2 v_{t-1} + (1-\beta_2)g_t^2$
-    
-    \If{\textcolor{red}{\texttt{do\_bias\_correction}}}
-    \State $\hat{m}_t \gets \frac{m_t}{1-\beta_1^t}$ , $v_t \gets \frac{v_t}{1-\beta_2^t}$ \Comment{\textcolor{blue}{bias correction not by default}}
-    \EndIf
-    
-    \State $\theta_t \gets \theta_{t-1} - \eta_t \cfrac{m_t}{\sqrt{v_t} + \epsilon}$
-\EndWhile
-\end{algorithmic}
-\end{algorithm}
-Experiments 
 \section{Why is AdamW the Top Dog?}
-The Adam optimizer \cite{kingma2017adammethodstochasticoptimization} was first published just over a decade ago. With the integral addition of decoupled weight decay \cite{loshchilov2019decoupledweightdecayregularization}, it has been the de facto stochastic optimizer choice for nearly all SOTA deep learning training, particularly in language model pretraining. Extensive research into understanding Adam's dynamics has been conducted however several key aspects remain not completely understood. \\
+The Adam optimizer \cite{kingma2017adammethodstochasticoptimization} was first published just over a decade ago. With the integral addition of decoupled weight decay \cite{loshchilov2019decoupledweightdecayregularization}, it has been the de facto stochastic optimizer choice for nearly all SOTA deep learning training, particularly in the pretraining of language models.  Extensive research into understanding Adam's dynamics has been conducted however several key aspects remain not completely understood. \\
 \\
 The optimizer itself is simply a synthesis of two already well-established optimization ideas - momentum and RMSProp. Adam enjoys the upsides of both methods and has proved to be a powerful and robust c\\
 Despite extensive research into optimizers for deep learning in the past decade, AdamW remains the default choice for the vast majority of both industry and academic applications. \\
@@ -472,10 +464,9 @@ Need a lot of sensitivity curves for models in vision and language setting.
 \item Beta scheduling too with experiments about the angle between the two 
 \item The BACKPack package experiment with class variances individual. Relationship to signSGD stuff from Hennig paper.
 \end{itemize}
-\subsection{}
 \subsection{Nesting the Moving averages}
 \subsection*{Coupling of momentum and RMSProp}
-The momentum and RMS boil down to keeping track of a moving average ($\text{EMT}_{\beta}$) parametrized by $\beta\in \R_{\ge 0}$. 
+AdamW effecitvely boils down to keeping track of two moving averages $\text{EMA}_{\beta_1}(g_{1:t}) $  parametrized by $\beta\in \R_{\ge 0}$. 
 \\
 While regular adam is given by:
 \[
@@ -488,13 +479,12 @@ w^{t+1} = w^{t} - \eta \text{EMA}_{\beta_1} \left( \frac{g_t}{\sqrt{EMA_{\beta_2
 Or expressed in two steps:
 \begin{align*}
 	v^{t} &= \beta_2v^{t-1} + (1-\beta_2)g^{t}\odot g^{t}\\
-	K^{t} &= \beta_1K^{t-1} + (1-\beta_1) \frac{g_{t}}{\sqrt{v^{t}} + \varepsilon  }
+	s^{t} &= \beta_1s^{t-1} + (1-\beta_1) \frac{g_{t}}{\sqrt{v^{t}} + \varepsilon  }
 \end{align*}
-Of course, the \\
+We show in detail in \ref{chap: bias correction} that the importance of bias correction in AdamW is greatly exaggerated. We therefore include no bias correction terms. 
 When doing this, the bias correction term becomes less clear cut. Of course the second moment estimate $v^{t}$ is the same ($1-\beta_1^{t} $ if you believe $E[g_t]$ is similar on initialization) . But after the nested average we have a sum of the form 
-
 \[
-	K^{t} = (1-\beta_1)\sum_{j=0}^{t-1} {\beta_1^{t-i-1} \frac{g_j}{\sqrt{v_j} + \varepsilon }}
+	K^{t} = (1-\beta_1)\sum_{j=0}^{t-1} {\beta_1^{t-i} \frac{g_j}{\sqrt{v_j} + \varepsilon }}
 \]
 
 Can we make the same kind of assumption for initial values of $t$? Namely that $E[\frac{g_j}{\sqrt{v_j} + \varepsilon }]$ is "close enough" for all small $j$ so that we can reduce the ugly expression above to a geometric sum. If so, great the term is the same. If not, any other clever tricks? 
@@ -520,7 +510,30 @@ We consider the distribution of
 \chapter{Bias Correction in Adam: A Detailed Analysis}
 \label{chap: bias correction}
 \section{Bias Correction: An Unnecessary Evil? }
-The AdamW optimizer can be represented as follows:( \todo{Probably smneed to replace this with the algorithm itself. Then can do some kind of "if do bias correction" condition:}
+The AdamW optimizer can be represented as follows:( \todo{Is algorithm or plain equation nicer? Everyone obviously knows AdamW but maybe it's nice to make clear the bias correction being put in/out?}
+\begin{algorithm}
+\caption{AdamW Optimizer \textcolor{blue}{(Bias Correction Experimental Focus)}}
+\label{alg:adam}
+\begin{algorithmic}[1]
+\Require $(\eta_t)_{t\ge_1} \subset \R_{\ge0}, \beta_1, \beta_2\in [0, 1),  \lambda \in\R_{>0}, \epsilon \in \R_{>0}$ \Comment{Standard hyperparameters}
+\Require $\theta_0\in\R^{d}$ \Comment{Initialised model weights}
+\Require \textcolor{red}{\texttt{do\_bias\_correction}}: bool \Comment{\textcolor{red}{Experimental flag}}
+
+\State Initialize $m_0, v_0, t \gets 0$
+\While{$\theta_t$ not converged}
+    \State $t \gets t + 1$
+    \State $g_t \gets \nabla_\theta f_t(\theta_{t-1})$
+    \State $m_t \gets \beta_1 m_{t-1} + (1-\beta_1)g_t$
+    \State $v_t \gets \beta_2 v_{t-1} + (1-\beta_2)g_t^2$
+    
+    \If{\textcolor{red}{\texttt{do\_bias\_correction}}}
+    \State $\hat{m}_t \gets \frac{m_t}{1-\beta_1^t}$ , $v_t \gets \frac{v_t}{1-\beta_2^t}$ \Comment{\textcolor{blue}{bias correction not by default}}
+    \EndIf
+    
+    \State $\theta_t \gets (1 - \eta_t \lambda) \theta_{t-1} - \eta_t \cfrac{m_t}{\sqrt{v_t} + \epsilon}$
+\EndWhile
+\end{algorithmic}
+\end{algorithm}
 \begin{equation*}
 \begin{aligned}
 	m^{t+1} &= \beta_1 m^{t} + (1-\beta_1)g^{t}  &, \quad  v^{t+1} &= \beta_2 v^{t} + (1-\beta_2) g^{t} \odot g^{t}\\
@@ -530,21 +543,20 @@ The AdamW optimizer can be represented as follows:( \todo{Probably smneed to rep
 \end{equation*}
 Where $\eta_t\in\R_{\ge_0}$ is the learning rate at time step $t$, $\alpha\in \R_{\ge0}$ is the weight decay and $\beta_1, \beta_2, \varepsilon $ are the model's hyperparemeters. 
 \\
-One observes in a large number of research papers (gotta find some nice examples), an extensive discussion into the role of bias correction. 
+Often research papers relating to Adam(W) (\cite{Goodfellow-et-al-2016}), include the bias correction term in their analyses. 
 Indeed bias correction is generally viewed by the optimization community as an inexorable component of the Adam(W) optimizer\\
 The purpose of this chapter is to discuss the role of bias correction on the performance of models trained using AdamW. For the purposes of all experiments conducted, we make use of a custom implementation of the AdamW optimizer. 
 \subsection{A Discussion of the "Proof" for Bias Correction}
-In a number of pedagogical resources (cite Goodfellow, Geiger lecture series), blogs and indeed seminal research papers - some variant of the following "proof" is given to justify the inclusion of bias correction:
+In a number of pedagogical resources (\cite{Goodfellow-et-al-2016}, \href{https://uni-tuebingen.de/fakultaeten/mathematisch-naturwissenschaftliche-fakultaet/fachbereiche/informatik/lehrstuehle/autonomous-vision/lectures/deep-learning/}{Deep Learning Lecture}), blogs and indeed the original Adam paper (\cite{kingma2017adammethodstochasticoptimization} - some variant of the following "proof" is given to justify the inclusion of bias correction:
 \begin{align*}
-	\E[m_t] &= \E\left[ (1-\beta_1)\sum_{j=1}^{t} {\beta_1^{t-i+1} g_i}  \right]  \\
-		&= \E\left[(1-\beta_1)g_t \sum_{j=1}^{t} {\beta_1^{t-i+1}}\right] (\text{assuming $\E[g_t] \approx E[g_i]\forall i<t$)}\\
+	\E[m_t] &= \E\left[ (1-\beta_1)\sum_{j=1}^{t} {\beta_1^{t-i} g_i}  \right]  \\
+		&= \E\left[(1-\beta_1)g_t \sum_{j=1}^{t} {\beta_1^{t-i}}\right] (\text{assuming $\E[g_t] \approx E[g_i]\forall i<t$)}\\
 		&= (1-\beta_1^{t})\E[g_t]
 \end{align*}
 It is therefore argued that dividing by  $1-\beta_1^{t}$ removes the expected "bias" in the exponential moving average.\\ 
 Where an analogous argument is used to justify the bias correction factor for $v_t$. \\
-This assumption that $\E[g_t] \approx \E[g_i]$ for $i<t$ is blatently false. We argue through a number of experiments with a custom implementation of AdamW that the bias correction step can be removed from AdamW with no adverse effects.
+This assumption that $\E[g_t] \approx \E[g_i]$ for $i<t$ is blatently false. We conduct a number of experiments with a custom implementation of AdamW and investigate the effect of this term.
 \\
-
 \todo{some visualiation or way to make this look nice}
 \section{Experimental Outline}
 We conduct a number of experiment in both a vision and language setting. \\
@@ -555,6 +567,23 @@ In the vision setting, we consider:
 \item Both a ResNet56\footnotemark{}\footnotetext{Pytorch's ResNet50 was specifically designed for Imagenet's $224\times 224$ images and applies agressive downsampling in the early layers. When applied to CIFAR-100's $32\times 32$ images, important information is then lost and . We therefore make use of a commonly-used specialised ResNet architecture \cite{Idelbayev18a} }, Densenet121 \cite{huang2018denselyconnectedconvolutionalnetworks} and a vision transformer on the CIFAR100 dataset
 \item Both a ResNet50 and a vision transformer on the Tiny Imagenet. 
 \end{itemize}
+We summarize the datasets and models trained in the vision setting in 
+\begin{table}[h]
+\centering
+\label{tab: vision}
+\begin{tabular}{ll}
+\toprule
+\textbf{Dataset} & \textbf{Models} \\
+\midrule
+MNIST, Fashion MNIST, SVHN & MLP, CNN \\
+CIFAR10 & Small ResNet ($\sim$1M params) \\
+CIFAR100 & ResNet56\footnotemark{}, Densenet121\\
+Tiny ImageNet & ResNet50, Vision Transformer \\
+\bottomrule
+\end{tabular}
+\caption{Overview of datasets and model architectures used in experiments.}
+\end{table}
+\footnotetext{PyTorch’s ResNet50 was designed for ImageNet’s 224×224 images and applies aggressive downsampling in early layers. When applied to CIFAR-100’s 32×32 images, important information is lost. We therefore use a specialized ResNet architecture \cite{Idelbayev18a}.}
 %We consider both the pre-training and fine-tuning setting for CIFAR100/TinyImagenet and just the pretraining setting for CIFAR10.\\
 We consider both the setting with a warmup followed by cosine decay learning rate schedule and constant learning rate. 
 \\
@@ -562,9 +591,7 @@ For both CIFAR-10/100, standard data augmentation techniques were implemented al
 \\
 In the case of pretraining language models, we restrict our attention to transformer based models. In particular we make use of the \href{https://github.com/Niccolo-Ajroldi/plainLM/tree/main}{following enhanced implementation} of nanoGPT (\cite{Karpathy2022}) including RMSNorm (instead of batch/layer normalization), SwiGLUi\cite{swiGLU} and Rotary Positional Embedding
 \\
-For each model, we run a sweep over a range of learning rates and 
-
-We note that the exact hyperparemeter configuration used for each experiment is not of integral importance in distinguishing the performance of AdamW with and without bias correction (and indeed zero-initialistion). In each case, we run a sweep to ensure a model of near SOTA performance but this is mainly for vanity and we also consider results across a wide range of hyperparameters to prove the performance similarities are consistent across the space of all hyperparameter configurations. 
+For each model, we run a sweep over a range of learning rates with an optimally chosen weight decay and batch size. We run the learning rate sweep for both 
 \\
 \subsection*{Bias Correction isn't the End of the Story}
 When initially implementing the bias correction-free version of AdamW, we assumed that initialising the moments $m_t, v_t$ with the gradients  $g_0, g_0^2$ respectively would be an effective way to remove any bias - thus eliminating the need for bias correction. However, we discovered that this is not quite as simple as initially expected. While initialising the moments as zero certainly induces a bias, it is not the same bias that is corrected by bias correction. \\
@@ -695,7 +722,6 @@ While first-order optimization methods such as AdamW are currently the de-facto 
 In recent years, there have been a number of papers which attempt to improve upon Adam(W) by leveraging information about the structure of individual layers. \\
 Newton's method, which requires explicit computation of the inverse-Hessian matrix, is rarely sufficiently efficient, or even tractable, in deep learning. Similarly, Natural Gradient Descent \cite{NGdescent} requires computation of the inverse-Fischer information matrix \\
 \\
-While there has been a myriad of literature
 Let $f:\mathcal{X} \times \Theta \to \mathcal{Y}$ with $\Theta \subset \R^{p}$ denote an arbirary deep neural network and let $L:  \mathcal{X} \times \Theta \times \mathcal{Y} \to \R_{\ge0}$ denote a (continuously differentiable) loss function. \\
 The textbook definition of most traditional stochastic optimization algorithms involves initialising some $\theta_0 \in \Theta$ and then updating with some rule 
 \[
@@ -717,6 +743,7 @@ A current SOTA language model is \cite{moonshot}, which uses a  mixture of exper
 \\
 \section{Related Work}
 \section{Understanding Muon}
+We provide a brief overview 
 The following exposition builds on the work of \cite{bernstein2024modulardualitydeeplearning}, \cite{bernstein2024oldoptimizernewnorm}, \cite{bernstein2025deriving}, \cite{jordan2024muon}, \cite{pethick2025trainingdeeplearningmodels} supplemented with some additional pedagogy and proofs.
 \todo{give a nice Muon explanation}
 \\
@@ -756,8 +783,7 @@ Y \in \R^{N\times D} \text{ is our target space}\\
 \
 \end{cases}
 \] 
-Indeed, excluding noise, this is an analogue of a hidden linear layer of a neural network
-%Let $X\in \R^{N\times d}$ be our feature matrix, $W\in \R^{d\times D}$ our weight matrix and $Y\in\R^{N\times D}$ our target space. $Y$ is then modelled as a linear function of  $X$ with noise.  $\varepsilon \in \R^{N\times D}$ with $ \varepsilon _{i,j} \sim \mathcal{N}(0, \sigma_j^2)$ for $\sigma_1^2, \ldots, \sigma _D^2 \in \R_{>0}$
+Indeed, excluding noise, this is an analogue of the linear portion of a hidden linear layer of a neural network. Here we are assuming no bias parameters. In any case Muon 
 \\
 The objective (or loss) function is then given by 
 \[
