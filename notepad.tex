@@ -430,8 +430,8 @@ however the wd update insists
 
 \end{comment}
 \chapter{Abstract}
-
-
+The success of any deep learning model is closely linked to the choice optimization algorithm used during training. While Adam with decoupled weight decay has emerged as the de facto optimizer for training large-scale models, some elements of the optimizer remain only partially understood. \\
+In the first part of this thesis, we present a series of empirical investigations with the aim to clarify which elements of Adam are critical to its performance. 
 \chapter{Introduction}
 \todo{Ask about whole story telling element and how i should frame the headless chicken with failing ideas approach i regretably followed}
 
@@ -507,6 +507,20 @@ with $\varepsilon = 1e-8$ as the default choice.
 It has been observed in a number of papers (\cite{yuan2020eadamoptimizerepsilonimpact}), that language model pretraining can be improved by altering the epsilon hyperparameter. Indeed increasing $\varepsilon $ to $1e-6$ can decrease final validation perplexity but at the cost of decreased training stability. Conversely, decreasing  $\varepsilon $ can improve stability without noticable decrease in performance. \\
 In every one of these experiments, the $\varepsilon $ value is chosen to apply globally, however the 
 We consider the distribution of 
+\begin{figure}[t]
+    \centering
+\includegraphics[width=0.8\linewidth]{/home/slaing/ML/thesis/thesis_notepad/images/eps_placement_ppl.pdf}  % Update path/filename
+    \caption{
+        Sensitivity of AdamW's validation perplexity to $\epsilon$ placement
+        in transformers. Compares $\epsilon$ inside ($\epsilon/\sqrt{v_t}$)
+        versus outside ($\epsilon/\sqrt{v_t + \epsilon}$) the square root term.
+        The minima for each configuration are annotated.
+    }
+    \label{fig:adamw_epsilon}
+\end{figure}
+
+
+
 \chapter{Bias Correction in Adam: A Detailed Analysis}
 \label{chap: bias correction}
 \section{Bias Correction: An Unnecessary Evil? }
@@ -900,7 +914,7 @@ We make use of this repository to ablate on some hyperparameter choices for the 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.9\linewidth]{/home/slaing/ML/thesis/thesis_notepad/images/muon_accuracy_figure.pdf}
-  \caption{Ablation varying number of Newton Schulz steps performed and comparing with an exact orthogonalization computed using the SVD of the matrix. Each data point on the x-axis corresponds to an averaged final test accuracy over 20 random seeds with error bars representing a 95\% confidence interval.   }
+  \caption{Ablation varying number of Newton Schulz steps performed and comparing with an exact orthogonalization computed using the SVD of the matrix. Each data point on the x-axis corresponds to an averaged final test accuracy over 20 random seeds with error bars representing a 95\% confidence interval. Other hyperparameters are as in speedrum configuration. }
   \label{fig:muon_cifar_NS}
 \end{figure}
 \section{Muon on nanoGPT and plainLM} 
