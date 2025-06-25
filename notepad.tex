@@ -1,6 +1,5 @@
 \documentclass[12pt]{book}
 
-
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{ragged2e}
@@ -427,38 +426,55 @@ however the wd update insists
 
 
 %%%%% Start of Structure properly 
-
 \end{comment}
 \chapter{Abstract}
-The success of any deep learning model is closely linked to the choice optimization algorithm used during training. While Adam with decoupled weight decay has emerged as the de facto optimizer for training large-scale models, some elements of the optimizer remain only partially understood. \\
-In the first part of this thesis, we present a series of empirical investigations with the aim to clarify which elements of Adam are critical to its performance. 
+The performance of deep learnings model is strongly influenced by the choice optimization algorithm used during training. While Adam with decoupled weight decay has has become the de facto standard for training large-scale models, certain components of the optimizer remain only partially understood. \\
+In the first part of this thesis, we conduct a series of empirical investigations with the aimed at identifying which elements of Adam are critical to its strong performance. In particular, we perform ablations on the ordering of the exponential moving averages, the role of the  $\varepsilon $ hyperparameter and offer a novel interpretation of bias correction. Notably we demonstate that the inclusion of bias correction in the commonly used setting of $\beta_1 = \beta_2 = 0.95$ in language models, the inclusion of bias correction can actually impair performance. 
+\\
+In the second part of the thesis, we explore the recently proposed Muon optimizer. In an attempt to understand the minimal conditions for which Muon offers a practical advantage over SGD and Adam, we study a number of simple problem settings such as multi-output linear regression and a generalized quadratic problem.   \\
+Additionally, we perform ablations on a Resnet implementation on CIFAR-10, studying the Newton Schulz polynomial which approximates the gradient orthogonalization and investigate whether applying the approximation to an exponential moving average is truly preferable to individual components.
+
 \chapter{Introduction}
 \todo{Ask about whole story telling element and how i should frame the headless chicken with failing ideas approach i regretably followed}
-
+Optimization algorithms are kkkk
 
 
 \chapter{Understanding Adam}
 \label{chap: Understanding Adam}
-We discuss some of the underlying theory, review some important literature and run some experiments with the aim of understanding the dynamics of AdamW and the role which certain design choices play in Adam's efficacy.
-
-\section{Why is AdamW the Top Dog?}
-The Adam optimizer \cite{kingma2017adammethodstochasticoptimization} was first published just over a decade ago. With the integral addition of decoupled weight decay \cite{loshchilov2019decoupledweightdecayregularization}, it has been the de facto stochastic optimizer choice for nearly all SOTA deep learning training, particularly in the pretraining of language models.  Extensive research into understanding Adam's dynamics has been conducted however several key aspects remain not completely understood. \\
+The Adam optimizer \cite{kingma2017adammethodstochasticoptimization} was first proposed just over a decade ago. With the integral addition of decoupled weight decay \cite{loshchilov2019decoupledweightdecayregularization}, it has become the de facto stochastic optimizer choice for nearly all SOTA deep learning training, particularly in the pretraining of language models.  Extensive research into understanding Adam's dynamics has been conducted however several aspects are not completely understood. \\
 \\
-The optimizer itself is simply a synthesis of two already well-established optimization ideas - momentum and RMSProp. Adam enjoys the upsides of both methods and has proved to be a powerful and robust c\\
+The optimizer itself is simply a synthesis of two already well-established optimization ideas - momentum and RMSProp. Adam inherits the stabilizing effect of momentum  and the adaptive scaling of RMSProp.  
 Despite extensive research into optimizers for deep learning in the past decade, AdamW remains the default choice for the vast majority of both industry and academic applications. \\
-While a substantial number of publications claim great and consistent  
-\section{Preliminaries and Related Work}
-\todo{Talk about the papers about understanding Adam and then a bit about what is stil not understood/ bottlenecks/is it really the best we can do}
-\subsection{EAdam Paper probably}
-\subsection{Relation to signSGD}
-\subsection{Why transformers need Adam: hessian and class imbalance}
-\todo{Talk about this latest batch size SGD paper from group that challenges these prior explanations}
-\subsection{The Secret Sauce paper}
+In this chapter, we discuss 
 
-\section{Some Experiments/Ablations (Mostly an experiment graveyard sadly)}
-Need a lot of sensitivity curves for models in vision and language setting.
+\section{Preliminaries and Related Work}
+For signal $(s_{j})_{j\ge 1} $ and $0\le\beta < 1$, we define the $\beta$-exponential moving average $\text{EMA}_{\beta}(s_{t})$ by 
+\[
+ \text{EMA}_{\beta}(s_t) := \begin{cases}
+	 0 \quad &\text{if } t=0
+ \\
+	 \beta \ \text{EMA}_{t-1}(s_{t-1}) + (1-\beta)s_t, &\text{if } t\ge 1
+ \end{cases}
+\]
+Or as a closed form expression:
+\[
+	\text{EMA}_{\beta}(s_t) := (1-\beta) \sum_{j=1}^{t} {\beta^{t-j}s_j}
+\] 
+In this notation, one can then express (without bias correction) Adam optimizer \footnotemark{}\footnotetext{The update for AdamW (Adam with decoupled weight decay) is given by $\theta_{t+1} = \theta$} as:
+\[
+	\theta_{t+1}` = \theta_t - \eta_t \cfrac{\text{EMA}_{\beta_1}(g_t)}{\sqrt{\text{EMA}_{\beta_2}(g_t^2)} + \varepsilon  }, 
+\]
+where $\theta_t, g_t \in\R^{d}$ are the respective model parameters and gradients at iteration $t\ge_1$, $(\eta_{j})_{j\ge_1} $ the scheduled learning rate and  $\varepsilon \in\R_{>0}$ is a small constant
+\todo{Talk about the papers about understanding Adam and then a bit about what is stil not understood/ bottlenecks/is it really the best we can do}
+\subsection*{EAdam Paper probably}
+\subsection*{Relation to signSGD}
+\subsection*{Why transformers need Adam: hessian and class imbalance}
+\todo{Talk about this latest batch size SGD paper from group that challenges these prior explanations}
+\subsection*{The Secret Sauce paper}
+
+\section{Some Experiments/Ablations (Mostly an experiment graveyard sadly)}`
 \begin{itemize}
-\item Nested moving average vs regular Adam: are they the same? Interesting since the choice of whichway to take the EMA is sort of arbitrary 
+\item Nested moving average vs regular Adam: are they the same? Interesting since the choice of whichway to take the EMA is sort of arbitrary. 
 \item Adam2SGD: Could look at SGD2Adam since the paper from Teodora showed some advantage in doing so
 \item Epsilon scheduling experiments: could be very related to the sgd thing... Can also be bespoke to parameter (seems like a universal epsilon for all parameters could be foolish. 
 \item Beta scheduling too with experiments about the angle between the two 
@@ -466,30 +482,23 @@ Need a lot of sensitivity curves for models in vision and language setting.
 \end{itemize}
 \subsection{Nesting the Moving averages}
 \subsection*{Coupling of momentum and RMSProp}
-AdamW effecitvely boils down to keeping track of two moving averages $\text{EMA}_{\beta_1}(g_{1:t}) $  parametrized by $\beta\in \R_{\ge 0}$. 
-\\
-While regular adam is given by:
+Adam is given by:
 \[
 w^{t+1} = w^{t} - \eta \frac{\text{EMA}_{\beta_1}(g_t)}{\sqrt{\text{EMA}_{\beta_2}(g_t ^2) } + \varepsilon  }
-\] 
+\]
+In other words, Adam combines the 
+The update direction $\frac{\text{EMA}_{\beta_1}(g_{t}}{\sqrt{\text{EMA}_{\beta_2}(g_t^2) + \varepsilon } }$ 
 one could also consider the double nesting formula
 \[
 w^{t+1} = w^{t} - \eta \text{EMA}_{\beta_1} \left( \frac{g_t}{\sqrt{EMA_{\beta_2}(g_t^2)} + \varepsilon  } \right) 
 \] 
-Or expressed in two steps:
+Or expressed in iterative steps:
 \begin{align*}
 	v^{t} &= \beta_2v^{t-1} + (1-\beta_2)g^{t}\odot g^{t}\\
 	s^{t} &= \beta_1s^{t-1} + (1-\beta_1) \frac{g_{t}}{\sqrt{v^{t}} + \varepsilon  }
+	\theta_t = \theta_{}
 \end{align*}
-We show in detail in \ref{chap: bias correction} that the importance of bias correction in AdamW is greatly exaggerated. We therefore include no bias correction terms. 
-When doing this, the bias correction term becomes less clear cut. Of course the second moment estimate $v^{t}$ is the same ($1-\beta_1^{t} $ if you believe $E[g_t]$ is similar on initialization) . But after the nested average we have a sum of the form 
-\[
-	K^{t} = (1-\beta_1)\sum_{j=0}^{t-1} {\beta_1^{t-i} \frac{g_j}{\sqrt{v_j} + \varepsilon }}
-\]
-
-Can we make the same kind of assumption for initial values of $t$? Namely that $E[\frac{g_j}{\sqrt{v_j} + \varepsilon }]$ is "close enough" for all small $j$ so that we can reduce the ugly expression above to a geometric sum. If so, great the term is the same. If not, any other clever tricks? 
-\\
-Indeed as we demonstrate in detail in \ref{chap: bias correction} that bias correction is currently poorly understood and is generally not required if proper learning rate scheduling is implemented. 
+In \ref{chap: bias correction} we demonstrate in detail that the significance of bias correction in AdamW overstated, particularly when appropriate learning rate scheduling is conducted. We therefore include no bias correction terms. 
 
 \subsection{Adam2SGD and $\varepsilon $ schedule}
 \todo{Ask Antonio if this is just fucked/should go in the appendix/nowhere}
@@ -511,10 +520,12 @@ We consider the distribution of
     \centering
 \includegraphics[width=0.8\linewidth]{/home/slaing/ML/thesis/thesis_notepad/images/eps_placement_ppl.pdf}  % Update path/filename
     \caption{
-        Sensitivity of AdamW's validation perplexity to $\epsilon$ placement
-        in transformers. Compares $\epsilon$ inside ($\epsilon/\sqrt{v_t}$)
-        versus outside ($\epsilon/\sqrt{v_t + \epsilon}$) the square root term.
-        The minima for each configuration are annotated.
+        Sensitivity of AdamW's final validation performance (100M held-out tokens) to $\epsilon$ placement
+        on ~162M parameter transformer. Compares $\epsilon$ inside square root ($\frac{m_t}{\sqrt{v_t+\varepsilon }  }$)
+        versus outside ($\frac{m_t}{\sqrt{v_t} + \varepsilon }$). Averaged across 3 random seeds. 
+        The minima for each configuration are annotated. All other hyperpararameters are 
+	\\
+	We observe that placing $\varepsilon $ inside square root is more sensitive to the choice of $\varepsilon $ but optimal performance is still similar.  
     }
     \label{fig:adamw_epsilon}
 \end{figure}
@@ -702,6 +713,8 @@ Consider the following factorization (we will ignore the $\varepsilon $ in the d
 The behaviour of $\rho(t;\beta_1,\beta_2) := \frac{\sqrt{1-\beta_2^{t}} }{1-\beta_1^{t}}$ which we refer to as the \textit{bias-correction factor} depends highly dependent on the choice of $\beta_1, \beta_2\in [0, 1)$ \\
 Consider the following plot: \\
 \includegraphics{bias_correction_factor.pdf}
+\\
+\includegraphics{b1_is_b2.pdf/bias_correction_factor.pdf}
 \\
 For the pair $(\beta_1, \beta_2) = (0.9, 0.999)$, the factor resembles a very steady warmup whereas for the pair $(\beta_1, \beta_2) = (0.95, 0.95)$, the factor it merely a large spike which quickly converges to 1\\
 \\
@@ -914,7 +927,7 @@ We make use of this repository to ablate on some hyperparameter choices for the 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.9\linewidth]{/home/slaing/ML/thesis/thesis_notepad/images/muon_accuracy_figure.pdf}
-  \caption{Ablation varying number of Newton Schulz steps performed and comparing with an exact orthogonalization computed using the SVD of the matrix. Each data point on the x-axis corresponds to an averaged final test accuracy over 20 random seeds with error bars representing a 95\% confidence interval. Other hyperparameters are as in speedrum configuration. }
+  \caption{Ablation varying number of Newton Schulz steps performed and comparison with performance with an exact orthogonalization computed using the SVD of the matrix. Each data point on the x-axis corresponds to an averaged final test accuracy over 20 random seeds with error bars representing a 95\% confidence interval. Other hyperparameters are as in record speedrum configuration. }
   \label{fig:muon_cifar_NS}
 \end{figure}
 \section{Muon on nanoGPT and plainLM} 

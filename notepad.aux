@@ -32,22 +32,17 @@
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \newlabel{chap: Understanding Adam}{{3}{9}{Understanding Adam}{chapter.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.1}Why is AdamW the Top Dog?}{9}{section.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3.2}Preliminaries and Related Work}{9}{section.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}EAdam Paper probably}{10}{subsection.3.2.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}Relation to signSGD}{10}{subsection.3.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.3}Why transformers need Adam: hessian and class imbalance}{10}{subsection.3.2.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.4}The Secret Sauce paper}{10}{subsection.3.2.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3.3}Some Experiments/Ablations (Mostly an experiment graveyard sadly)}{10}{section.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.1}Nesting the Moving averages}{10}{subsection.3.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.1}Preliminaries and Related Work}{9}{section.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}Some Experiments/Ablations (Mostly an experiment graveyard sadly)}{10}{section.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Nesting the Moving averages}{10}{subsection.3.2.1}\protected@file@percent }
 \citation{yuan2020eadamoptimizerepsilonimpact}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.2}Adam2SGD and $\varepsilon $ schedule}{11}{subsection.3.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.3}How EMA smooths the update signal}{11}{subsection.3.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.4}BackPACK}{11}{subsection.3.3.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.5}The $\varepsilon $ Hyperparameter}{11}{subsection.3.3.5}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces  Sensitivity of AdamW's validation perplexity to $\epsilon $ placement in transformers. Compares $\epsilon $ inside ($\epsilon /\sqrt  {v_t}$) versus outside ($\epsilon /\sqrt  {v_t + \epsilon }$) the square root term. The minima for each configuration are annotated. \relax }}{12}{figure.caption.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}Adam2SGD and $\varepsilon $ schedule}{11}{subsection.3.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.3}How EMA smooths the update signal}{11}{subsection.3.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.4}BackPACK}{11}{subsection.3.2.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.5}The $\varepsilon $ Hyperparameter}{11}{subsection.3.2.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces  Sensitivity of AdamW's final validation performance (100M held-out tokens) to $\epsilon $ placement on ~162M parameter transformer. Compares $\epsilon $ inside square root ($\frac  {m_t}{\sqrt  {v_t+\varepsilon } }$) versus outside ($\frac  {m_t}{\sqrt  {v_t} + \varepsilon }$). Averaged across 3 random seeds. The minima for each configuration are annotated. All other hyperpararameters are   We observe that placing $\varepsilon $ inside square root is more sensitive to the choice of $\varepsilon $ but optimal performance is still similar. \relax }}{12}{figure.caption.7}\protected@file@percent }
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{fig:adamw_epsilon}{{3.1}{12}{Sensitivity of AdamW's validation perplexity to $\epsilon $ placement in transformers. Compares $\epsilon $ inside ($\epsilon /\sqrt {v_t}$) versus outside ($\epsilon /\sqrt {v_t + \epsilon }$) the square root term. The minima for each configuration are annotated. \relax }{figure.caption.3}{}}
+\newlabel{fig:adamw_epsilon}{{3.1}{12}{Sensitivity of AdamW's final validation performance (100M held-out tokens) to $\epsilon $ placement on ~162M parameter transformer. Compares $\epsilon $ inside square root ($\frac {m_t}{\sqrt {v_t+\varepsilon } }$) versus outside ($\frac {m_t}{\sqrt {v_t} + \varepsilon }$). Averaged across 3 random seeds. The minima for each configuration are annotated. All other hyperpararameters are \\ We observe that placing $\varepsilon $ inside square root is more sensitive to the choice of $\varepsilon $ but optimal performance is still similar. \relax }{figure.caption.7}{}}
 \citation{Goodfellow-et-al-2016}
 \@writefile{toc}{\contentsline {chapter}{\numberline {4}Bias Correction in Adam: A Detailed Analysis}{13}{chapter.4}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
@@ -65,11 +60,11 @@
 \citation{Idelbayev18a}
 \citation{Karpathy2022}
 \citation{swiGLU}
-\newlabel{tab: vision}{{\caption@xref {tab: vision}{ on input line 587}}{15}{Experimental Outline}{table.caption.4}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {4.1}{\ignorespaces Overview of datasets and model architectures used in experiments.\relax }}{15}{table.caption.4}\protected@file@percent }
+\newlabel{tab: vision}{{\caption@xref {tab: vision}{ on input line 598}}{15}{Experimental Outline}{table.caption.8}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4.1}{\ignorespaces Overview of datasets and model architectures used in experiments.\relax }}{15}{table.caption.8}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {4.3}Is Bias Correction just Hidden Learning rate scheduling?}{17}{section.4.3}\protected@file@percent }
 \newlabel{eq: bias factor}{{4.1}{17}{Is Bias Correction just Hidden Learning rate scheduling?}{equation.4.3.1}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {4.2}{\ignorespaces \textit  {ZI} denotes Zero init, \textit  {BC} denotes Bias Correction. Not doing ZI means we initialize $m$ and $v$ at $g_0$ and $g_0^2$ respectively. Default for AdamW is ZI and BC. Performing bias correction is not as important as initialization in Adam. Averaged results over 4 random seeds  HPs $\text  {lr:}0.008, \beta _1:0.95, \beta _2: 0.95, wd:0.1$\relax }}{19}{table.caption.6}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.2}{\ignorespaces \textit  {ZI} denotes Zero init, \textit  {BC} denotes Bias Correction. Not doing ZI means we initialize $m$ and $v$ at $g_0$ and $g_0^2$ respectively. Default for AdamW is ZI and BC. Performing bias correction is not as important as initialization in Adam. Averaged results over 4 random seeds  HPs $\text  {lr:}0.008, \beta _1:0.95, \beta _2: 0.95, wd:0.1$\relax }}{20}{table.caption.10}\protected@file@percent }
 \citation{NGdescent}
 \citation{moonshot}
 \@writefile{toc}{\contentsline {chapter}{\numberline {5}Beyond Adam: Is Muon the future?}{21}{chapter.5}\protected@file@percent }
@@ -98,8 +93,8 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.3.4}Small MLPs}{25}{subsection.5.3.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {5.4}SVD structural analysis}{25}{section.5.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.4.1}CIFAR-10 ResNet}{25}{subsection.5.4.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces Ablation varying number of Newton Schulz steps performed and comparing with an exact orthogonalization computed using the SVD of the matrix. Each data point on the x-axis corresponds to an averaged final test accuracy over 20 random seeds with error bars representing a 95\% confidence interval. Other hyperparameters are as in speedrum configuration. \relax }}{26}{figure.caption.8}\protected@file@percent }
-\newlabel{fig:muon_cifar_NS}{{5.1}{26}{Ablation varying number of Newton Schulz steps performed and comparing with an exact orthogonalization computed using the SVD of the matrix. Each data point on the x-axis corresponds to an averaged final test accuracy over 20 random seeds with error bars representing a 95\% confidence interval. Other hyperparameters are as in speedrum configuration. \relax }{figure.caption.8}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces Ablation varying number of Newton Schulz steps performed and comparison with performance with an exact orthogonalization computed using the SVD of the matrix. Each data point on the x-axis corresponds to an averaged final test accuracy over 20 random seeds with error bars representing a 95\% confidence interval. Other hyperparameters are as in record speedrum configuration. \relax }}{26}{figure.caption.12}\protected@file@percent }
+\newlabel{fig:muon_cifar_NS}{{5.1}{26}{Ablation varying number of Newton Schulz steps performed and comparison with performance with an exact orthogonalization computed using the SVD of the matrix. Each data point on the x-axis corresponds to an averaged final test accuracy over 20 random seeds with error bars representing a 95\% confidence interval. Other hyperparameters are as in record speedrum configuration. \relax }{figure.caption.12}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {5.5}Muon on nanoGPT and plainLM}{26}{section.5.5}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {5.6}Experimental }{26}{section.5.6}\protected@file@percent }
 \bibstyle{alpha}
