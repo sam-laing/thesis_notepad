@@ -928,9 +928,21 @@ We make use of this repository to ablate on some hyperparameter choices for the 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.9\linewidth]{/home/slaing/ML/thesis/thesis_notepad/images/muon_accuracy_figure.pdf}
-  \caption{Ablation varying number of Newton Schulz steps performed and comparison with performance with an exact orthogonalization computed using the SVD of the matrix. Each data point on the x-axis corresponds to an averaged final test accuracy over 20 random seeds with error bars representing a 95\% confidence interval. Other hyperparameters are as in record speedrum configuration. }
+  \caption{Ablation varying number of Newton Schulz steps performed and comparison with performance with an exact orthogonalization computed using the SVD of the matrix. Each data point on the x-axis corresponds to an averaged final test accuracy over 20 random seeds with error bars representing a 95\% confidence interval. Other hyperparameters are as in record speedrum configuration. The dotted red line indicates average final test accuracy when using the full gradient orthogonalization across 10 seeds also.}
+  \label{fig:muon_reversed_cifar_NS}
+\end{figure}
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.8\linewidth]{/home/slaing/ML/thesis/thesis_notepad/images/muon_reversed_accuracy_figure.pdf}
+  \caption{Orthogonalizing each gradient seperately.  Ablation varying number of Newton Schulz steps performed and comparison with performance with an exact orthogonalization computed using the SVD of the matrix. Each data point on the x-axis corresponds to an averaged final test accuracy over 20 random seeds with error bars representing a 95\% confidence interval. Other hyperparameters are as in record speedrum configuration. }
   \label{fig:muon_cifar_NS}
 \end{figure}
+\todo{Muon cifar studying the cases
+\[
+\text{EMA}_{\beta}(\text{Newton Schulz}(G_t)) \quad \text{vs.} \quad \text{Newtonschluz}(\text{EMA}_{\beta}(G_t))
+\]
+The latter is Muon. former seems to perform worse by a few percent after extensive tuinng of the $\beta$ hyperparameter
+}
 \section{Experimental }
 \chapter{Discussion and Future Work}
 \bibliographystyle{alpha}
