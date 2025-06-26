@@ -435,8 +435,8 @@ In the second part of the thesis, we explore the recently proposed Muon optimize
 Additionally, we perform ablations on a Resnet implementation on CIFAR-10, studying the Newton Schulz polynomial which approximates the gradient orthogonalization and investigate whether applying the approximation to an exponential moving average is truly preferable to individual components.
 
 \chapter{Introduction}
-\todo{Ask about whole story telling element and how i should frame the headless chicken with failing ideas approach i regretably followed}
-Optimization algorithms are kkkk
+\todo{Ask about whole story telling element and how i should frame the headless chicken with failing ideas approach i regretably followed}\\
+Optimization algorithms are 
 
 
 \chapter{Understanding Adam}
@@ -460,12 +460,14 @@ Or as a closed form expression:
 \[
 	\text{EMA}_{\beta}(s_t) := (1-\beta) \sum_{j=1}^{t} {\beta^{t-j}s_j}
 \] 
-In this notation, one can then express (without bias correction) Adam optimizer \footnotemark{}\footnotetext{The update for AdamW (Adam with decoupled weight decay) is given by $\theta_{t+1} = \theta$} as:
+In this notation, one can then express (without bias correction) Adam optimizer \footnotemark{}\footnotetext{The update for AdamW (Adam with decoupled weight decay) is given by $\theta_{t+1} = (1 - \eta_t \lambda )\theta$} as:
 \[
 	\theta_{t+1}` = \theta_t - \eta_t \cfrac{\text{EMA}_{\beta_1}(g_t)}{\sqrt{\text{EMA}_{\beta_2}(g_t^2)} + \varepsilon  }, 
 \]
 where $\theta_t, g_t \in\R^{d}$ are the respective model parameters and gradients at iteration $t\ge_1$, $(\eta_{j})_{j\ge_1} $ the scheduled learning rate and  $\varepsilon \in\R_{>0}$ is a small constant
 \todo{Talk about the papers about understanding Adam and then a bit about what is stil not understood/ bottlenecks/is it really the best we can do}
+\section{Problem Settings and Experimental Details}
+
 \subsection*{EAdam Paper probably}
 \subsection*{Relation to signSGD}
 \subsection*{Why transformers need Adam: hessian and class imbalance}
@@ -494,7 +496,7 @@ w^{t+1} = w^{t} - \eta \text{EMA}_{\beta_1} \left( \frac{g_t}{\sqrt{EMA_{\beta_2
 \] 
 Or expressed in iterative steps:
 \begin{align*}
-	v^{t} &= \beta_2v^{t-1} + (1-\beta_2)g^{t}\odot g^{t}\\
+	v^{t} &= \beta_2v^{t-1} + (1-\beta_2)g_{t}^2\\
 	s^{t} &= \beta_1s^{t-1} + (1-\beta_1) \frac{g_{t}}{\sqrt{v^{t}} + \varepsilon  }
 	\theta_t = \theta_{}
 \end{align*}
@@ -923,14 +925,12 @@ Remarkably, with enhancements using Muon (\todo{cite the right thing}), the curr
 We make use of this repository to ablate on some hyperparameter choices for the Muon optimizer while enjoying minimal experiment runtimes. 
 \\
 \subsubsection*{Comparing Newton Schulz approximation to full Gradient Orthogonalization}
-
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.9\linewidth]{/home/slaing/ML/thesis/thesis_notepad/images/muon_accuracy_figure.pdf}
   \caption{Ablation varying number of Newton Schulz steps performed and comparison with performance with an exact orthogonalization computed using the SVD of the matrix. Each data point on the x-axis corresponds to an averaged final test accuracy over 20 random seeds with error bars representing a 95\% confidence interval. Other hyperparameters are as in record speedrum configuration. }
   \label{fig:muon_cifar_NS}
 \end{figure}
-\section{Muon on nanoGPT and plainLM} 
 \section{Experimental }
 \chapter{Discussion and Future Work}
 \bibliographystyle{alpha}

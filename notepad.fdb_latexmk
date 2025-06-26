@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex notepad"] 1750868733 "notepad.aux" "notepad.bbl" "notepad" 1750868735
+["bibtex notepad"] 1750965414 "notepad.aux" "notepad.bbl" "notepad" 1750967753
   "/usr/share/texlive/texmf-dist/bibtex/bst/base/alpha.bst" 1292289607 23907 a5f93555796fb564b924339521f10a7c ""
-  "bibliography.bib" 1750672028 5700 e9889c6409693d7ba7b9dbf9339347d5 ""
-  "notepad.aux" 1750868734 11320 5938394e5b5c3c6a2ae357f103dcb32b "pdflatex"
+  "bibliography.bib" 1750956713 6068 7156d6a4d2298a1512ecdcd3b33483e6 ""
+  "notepad.aux" 1750967753 11334 43d1ab21502a1e843d60b9c55408ddfd "pdflatex"
   (generated)
   "notepad.bbl"
   "notepad.blg"
-["pdflatex"] 1750868733 "notepad.tex" "notepad.pdf" "notepad" 1750868735
+["pdflatex"] 1750967751 "notepad.tex" "notepad.pdf" "notepad" 1750967753
   "/etc/texmf/web2c/texmf.cnf" 1698408728 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/slaing/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1200.600pk" 1742209794 24132 d043d21d3fb4ed05e80a298b2cc6128d ""
   "/home/slaing/.texlive2021/texmf-var/fonts/pk/ljfour/public/bbm/bbm12.600pk" 1744567824 8424 b6c8a8138ef054056acec6f4065e0765 ""
@@ -245,12 +245,12 @@
   "images//b1_is_b2.pdf/bias_correction_factor.pdf" 1750866516 21481 71994ec205d0ab9f2749c88e3cbc66a4 ""
   "images//bias_correction_factor.pdf" 1750866499 17725 64836330eeaad2788d953c83cb132935 ""
   "images/eps_placement_ppl.pdf" 1750762238 21390 4ad47fc0589fb575cdf3a1af0eeea470 ""
-  "images/muon_accuracy_figure.pdf" 1750366402 21092 f5365fb21ec7307db61b5d6140475e3f ""
-  "notepad.aux" 1750868734 11320 5938394e5b5c3c6a2ae357f103dcb32b "pdflatex"
-  "notepad.bbl" 1750868733 3070 a73218c7979d0aa811f856fbfd6febc1 "bibtex notepad"
-  "notepad.out" 1750868734 6785 66a42879242ad3185a8b9960e8f3ec67 "pdflatex"
-  "notepad.tex" 1750868731 60651 47a622905cb9020198552a21d20c857b ""
-  "notepad.toc" 1750868734 3178 a029084d96c1724440d608f81bf97df8 "pdflatex"
+  "images/muon_accuracy_figure.pdf" 1750967751 21145 ae54b23e1e2c1edeeff25be57ab9b609 ""
+  "notepad.aux" 1750967753 11334 43d1ab21502a1e843d60b9c55408ddfd "pdflatex"
+  "notepad.bbl" 1750965414 3070 a73218c7979d0aa811f856fbfd6febc1 "bibtex notepad"
+  "notepad.out" 1750967753 6855 bb7c0233ad2a27282bf9aa5c0582c172 "pdflatex"
+  "notepad.tex" 1750966640 60674 b1c8ef3fbf0b6cad4d053966287ab4ab ""
+  "notepad.toc" 1750967753 3192 7ed44801205116a29ae9ca8c7ebf31f0 "pdflatex"
   (generated)
   "notepad.aux"
   "notepad.log"
